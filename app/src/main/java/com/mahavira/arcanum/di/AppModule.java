@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.mahavira.arcanum.login.presentation.LoginRouter;
 
 import javax.inject.Singleton;
@@ -23,6 +24,12 @@ class AppModule {
     @Singleton
     Context provideContext(Application application) {
         return application;
+    }
+
+    @Provides
+    @Singleton
+    FirebaseAuth provideFirebaseAuth() {
+        return FirebaseAuth.getInstance();
     }
 
     @Provides

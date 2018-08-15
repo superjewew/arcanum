@@ -59,5 +59,13 @@ dependencies {
     implementation libs.databindingBaseLibrary
     implementation libs.databindingLibrary
 
+    // Firebase
+    implementation libs.firebaseAuth
+    implementation 'com.github.frangsierra:rx2firebase:1.4.0'
+
+    // RxJava
+    implementation libs.rxAndroid
+    implementation libs.rxJava
+
     implementation project(path: ':base')
 }
