@@ -61,8 +61,11 @@ dependencies {
     annotationProcessor libs.archLifecycleCompiler
 
     // Firebase
+    implementation libs.firebaseCore
     implementation libs.firebaseAuth
 
     implementation project(path: ':base')
     implementation project(path: ':login')
 }
+
+apply plugin: 'com.google.gms.google-services'
