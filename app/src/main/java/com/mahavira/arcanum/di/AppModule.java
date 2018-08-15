@@ -7,6 +7,7 @@ import android.content.Context;
 import com.google.firebase.auth.FirebaseAuth;
 import com.mahavira.arcanum.login.presentation.LoginRouter;
 
+import com.mahavira.arcanum.router.LoginRouterImpl;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -34,7 +35,7 @@ class AppModule {
 
     @Provides
     LoginRouter provideLoginRouter() {
-        return null;
+        return new LoginRouterImpl();
     }
 
 }

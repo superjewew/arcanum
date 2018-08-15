@@ -6,9 +6,14 @@ import com.android.databinding.library.baseAdapters.BR;
 import com.mahavira.arcanum.login.R;
 import com.mahavira.arcanum.login.databinding.ActivityLoginBinding;
 import com.mahavira.arcanum.login.domain.entity.AuthParam;
+import com.mahavira.arcanum.login.presentation.LoginRouter;
 import com.mahavira.base.presentation.BaseActivity;
+import javax.inject.Inject;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
+
+    @Inject
+    LoginRouter mRouter;
 
     @Override
     public int getViewModelBindingVariable() {
@@ -29,6 +34,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
                 switch (authResultResource.status) {
                     case SUCCESS:
                         Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+                        mRouter.goToDashboard(this);
                         break;
                     case ERROR:
                         Toast.makeText(this, "Login Failed, " + authResultResource.message, Toast.LENGTH_SHORT)
