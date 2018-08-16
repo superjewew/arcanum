@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
 
 
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -25,10 +25,35 @@ android {
 }
 
 dependencies {
+    def libs = rootProject.ext.libraries
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation libs.supportAppCompat
+    implementation libs.supportV4
+    implementation libs.supportConstraintLayout
+    testImplementation libs.junit
+    androidTestImplementation libs.supportTestRunner
+    androidTestImplementation libs.espressoCore
+
+    // Dagger
+    implementation libs.dagger
+    implementation libs.daggerAndroid
+    implementation libs.daggerAndroidSupport
+    annotationProcessor libs.daggerCompiler
+    annotationProcessor libs.daggerAndroidProcessor
+
+    // DataBinding
+    implementation libs.databindingBaseLibrary
+    implementation libs.databindingLibrary
+
+    // Firebase
+    implementation libs.firebaseAuth
+    implementation 'com.github.frangsierra:rx2firebase:1.4.0'
+
+    // RxJava
+    implementation libs.rxAndroid
+    implementation libs.rxJava
+
+    implementation project(path: ':base')
 }
