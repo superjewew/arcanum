@@ -63,6 +63,7 @@ dependencies {
     // Firebase
     implementation libs.firebaseCore
     implementation libs.firebaseAuth
+    implementation libs.firebaseFirestore
 
     implementation project(path: ':base')
     implementation project(path: ':login')
