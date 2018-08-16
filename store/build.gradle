@@ -46,6 +46,7 @@ dependencies {
     implementation libs.supportV4
     implementation libs.supportConstraintLayout
     implementation libs.supportRecyclerView
+    implementation libs.supportCardView
     testImplementation libs.junit
     androidTestImplementation libs.supportTestRunner
     androidTestImplementation libs.espressoCore
