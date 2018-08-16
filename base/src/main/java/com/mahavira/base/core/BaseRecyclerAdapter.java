@@ -20,7 +20,7 @@ public abstract class BaseRecyclerAdapter<T, V extends ViewDataBinding> extends 
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
-        V binding = inflateBinding();
+        V binding = inflateBinding(parent);
 
         return new BaseViewHolder(binding);
     }
@@ -42,9 +42,9 @@ public abstract class BaseRecyclerAdapter<T, V extends ViewDataBinding> extends 
         notifyDataSetChanged();
     }
 
-    protected abstract void bindToViewHolder(T data);
+    protected abstract int getVariableId();
 
-    protected abstract V inflateBinding();
+    protected abstract V inflateBinding(ViewGroup parent);
 
     class BaseViewHolder extends ViewHolder {
 
@@ -56,7 +56,7 @@ public abstract class BaseRecyclerAdapter<T, V extends ViewDataBinding> extends 
         }
 
         void bind(T data) {
-            bindToViewHolder(data);
+            mBinding.setVariable(getVariableId(), data);
             mBinding.executePendingBindings();
         }
     }
