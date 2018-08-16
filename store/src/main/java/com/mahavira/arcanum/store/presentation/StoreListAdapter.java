@@ -3,7 +3,6 @@ package com.mahavira.arcanum.store.presentation;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.mahavira.arcanum.store.BR;
 import com.mahavira.arcanum.store.databinding.ItemStoreListBinding;
 import com.mahavira.arcanum.store.domain.entity.Store;
 import com.mahavira.base.core.BaseRecyclerAdapter;
@@ -21,8 +20,8 @@ public class StoreListAdapter extends BaseRecyclerAdapter<Store, ItemStoreListBi
     }
 
     @Override
-    protected int getVariableId() {
-        return BR.store;
+    protected void bind(final ItemStoreListBinding binding, final Store data) {
+        binding.setStore(data);
     }
 
     @Override

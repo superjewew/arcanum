@@ -3,9 +3,7 @@ package com.mahavira.base.core;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.ViewGroup;
-import com.mahavira.base.core.BaseRecyclerAdapter.BaseViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,23 +11,23 @@ import java.util.List;
  * Created by norman on 16/08/18.
  */
 
-public abstract class BaseRecyclerAdapter<T, V extends ViewDataBinding> extends RecyclerView.Adapter<BaseViewHolder> {
+public abstract class BaseRecyclerAdapter<T, V extends ViewDataBinding>
+        extends RecyclerView.Adapter<BaseViewHolder<V>> {
 
-    private List<T> mDataList = new ArrayList<>();
+    protected List<T> mDataList = new ArrayList<>();
 
     @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
+    public BaseViewHolder<V> onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         V binding = inflateBinding(parent);
 
-        return new BaseViewHolder(binding);
+        return new BaseViewHolder<>(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final BaseViewHolder holder, final int position) {
-        T data = mDataList.get(position);
-
-        holder.bind(data);
+    public void onBindViewHolder(@NonNull final BaseViewHolder<V> holder, final int position) {
+        bind(holder.mBinding, mDataList.get(position));
+        holder.mBinding.executePendingBindings();
     }
 
     @Override
@@ -42,22 +40,8 @@ public abstract class BaseRecyclerAdapter<T, V extends ViewDataBinding> extends 
         notifyDataSetChanged();
     }
 
-    protected abstract int getVariableId();
+    protected abstract void bind(V binding, T data);
 
     protected abstract V inflateBinding(ViewGroup parent);
 
-    class BaseViewHolder extends ViewHolder {
-
-        private V mBinding;
-
-        public BaseViewHolder(final V binding) {
-            super(binding.getRoot());
-            mBinding = binding;
-        }
-
-        void bind(T data) {
-            mBinding.setVariable(getVariableId(), data);
-            mBinding.executePendingBindings();
-        }
-    }
 }
