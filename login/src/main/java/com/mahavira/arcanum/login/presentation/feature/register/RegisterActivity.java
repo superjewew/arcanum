@@ -5,6 +5,7 @@ import android.widget.Toast;
 import com.mahavira.arcanum.login.BR;
 import com.mahavira.arcanum.login.R;
 import com.mahavira.arcanum.login.databinding.ActivityRegisterBinding;
+import com.mahavira.arcanum.login.domain.entity.User;
 import com.mahavira.base.presentation.BaseActivity;
 
 public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, RegisterViewModel> {
@@ -36,5 +37,7 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
                 }
             }
         });
+
+        getDataBinding().setUser(new User());
     }
 }
