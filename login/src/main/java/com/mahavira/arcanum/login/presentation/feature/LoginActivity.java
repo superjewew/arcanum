@@ -44,6 +44,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             }
         });
 
+        getViewModel().getRegisterEvent().observe(this, __ -> mRouter.goToRegister(this));
+
         getDataBinding().setParam(new AuthParam("", ""));
 
     }
