@@ -21,4 +21,9 @@ public class StoreRouterImpl implements StoreRouter {
         intent.putExtra(STORE_EXTRA, Parcels.wrap(store));
         context.startActivity(intent);
     }
+
+    @Override
+    public void goToPlayHereConfirmation(final Context context) {
+
+    }
 }

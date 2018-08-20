@@ -7,6 +7,9 @@
         <variable
             name="store"
             type="com.mahavira.arcanum.store.domain.entity.Store"/>
+        <variable
+            name="viewModel"
+            type="com.mahavira.arcanum.store.presentation.detail.StoreDetailViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -28,6 +31,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/games_caption"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Play Here!"
+            android:paddingLeft="64dp"
+            android:paddingRight="64dp"
+            android:onClick="@{() -> viewModel.playHere()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

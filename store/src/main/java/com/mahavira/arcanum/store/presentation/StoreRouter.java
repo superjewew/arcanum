@@ -11,4 +11,6 @@ public interface StoreRouter {
 
     void goToStoreDetail(Context context, Store store);
 
+    void goToPlayHereConfirmation(Context context);
+
 }

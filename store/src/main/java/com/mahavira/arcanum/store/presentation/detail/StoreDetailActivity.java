@@ -3,11 +3,14 @@ package com.mahavira.arcanum.store.presentation.detail;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
+import com.mahavira.arcanum.store.BR;
 import com.mahavira.arcanum.store.R;
 import com.mahavira.arcanum.store.databinding.ActivityStoreDetailBinding;
 import com.mahavira.arcanum.store.domain.entity.Store;
+import com.mahavira.arcanum.store.presentation.StoreRouter;
 import com.mahavira.base.presentation.BaseActivity;
 import com.mahavira.base.presentation.ExtraInjectable;
+import javax.inject.Inject;
 import org.parceler.Parcels;
 
 public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding, StoreDetailViewModel> implements
@@ -19,9 +22,12 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
 
     private Store mStore;
 
+    @Inject
+    StoreRouter mStoreRouter;
+
     @Override
     public int getViewModelBindingVariable() {
-        return NO_VIEW_MODEL_BINDING_VARIABLE;
+        return BR.viewModel;
     }
 
     @Override
@@ -39,6 +45,9 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
         setupRecyclerView(mAdapter);
 
         updateAvailableGames();
+
+        getViewModel().getPlayHereClickedEvent().observe(this, __ -> mStoreRouter.goToPlayHereConfirmation(this));
+
     }
 
     private void updateAvailableGames() {
@@ -57,7 +66,7 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
 
     @Override
     public void injectExtras(@NonNull final Bundle extras) {
-        if(extras.containsKey(STORE_EXTRA)) {
+        if (extras.containsKey(STORE_EXTRA)) {
             mStore = Parcels.unwrap(extras.getParcelable(STORE_EXTRA));
         }
     }
