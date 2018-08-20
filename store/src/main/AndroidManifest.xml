@@ -3,7 +3,8 @@
     package="com.mahavira.arcanum.store">
 
     <application>
-        <activity android:name=".presentation.StoreListActivity"/>
+        <activity android:name=".presentation.StoreListActivity" />
+        <activity android:name=".presentation.detail.StoreDetailActivity"></activity>
     </application>
 
 </manifest>
