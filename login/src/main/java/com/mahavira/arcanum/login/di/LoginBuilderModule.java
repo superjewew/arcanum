@@ -4,6 +4,8 @@ import android.arch.lifecycle.ViewModel;
 
 import com.mahavira.arcanum.login.presentation.feature.LoginActivity;
 import com.mahavira.arcanum.login.presentation.feature.LoginViewModel;
+import com.mahavira.arcanum.login.presentation.feature.register.RegisterActivity;
+import com.mahavira.arcanum.login.presentation.feature.register.RegisterViewModel;
 import com.mahavira.base.di.ViewModelKey;
 
 import dagger.Binds;
@@ -22,8 +24,16 @@ public abstract class LoginBuilderModule {
     @ContributesAndroidInjector
     abstract LoginActivity bindLoginActivity();
 
+    @ContributesAndroidInjector
+    abstract RegisterActivity bindRegisterActivity();
+
     @Binds
     @IntoMap
     @ViewModelKey(LoginViewModel.class)
     abstract ViewModel bindLoginViewModel(LoginViewModel loginViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RegisterViewModel.class)
+    abstract ViewModel bindRegisterViewModel(RegisterViewModel registerViewModel);
 }
