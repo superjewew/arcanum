@@ -3,6 +3,8 @@ package com.mahavira.arcanum.login.domain.repo;
 
 import com.google.firebase.auth.AuthResult;
 
+import com.mahavira.arcanum.login.domain.entity.User;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 
@@ -12,4 +14,5 @@ import io.reactivex.Single;
 
 public interface LoginRepository {
     Single<AuthResult> login(String email, String password);
+    Completable register(User param);
 }

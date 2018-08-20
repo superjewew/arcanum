@@ -2,6 +2,8 @@ package com.mahavira.base.core;
 
 import android.support.annotation.NonNull;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import java.util.List;
 
@@ -16,6 +18,14 @@ public class BaseRepository {
         return Maybe.create(
                 e -> ref.get()
                         .addOnCompleteListener(task -> e.onSuccess(task.getResult().toObjects(clazz)))
+                        .addOnFailureListener(e::onError));
+    }
+
+    @NonNull
+    protected Completable setValue(@NonNull final DocumentReference ref, final Object value) {
+        return Completable.create(
+                e -> ref.set(value)
+                        .addOnSuccessListener(documentReference -> e.onComplete())
                         .addOnFailureListener(e::onError));
     }
 
