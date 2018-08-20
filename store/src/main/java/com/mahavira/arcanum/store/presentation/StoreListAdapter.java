@@ -15,13 +15,18 @@ public class StoreListAdapter extends BaseRecyclerAdapter<Store, ItemStoreListBi
 
     private Context mContext;
 
-    StoreListAdapter(Context context) {
+    private StoreListViewModel mViewModel;
+
+    StoreListAdapter(Context context, StoreListViewModel viewModel) {
         mContext = context;
+        mViewModel = viewModel;
     }
 
     @Override
     protected void bind(final ItemStoreListBinding binding, final Store data) {
         binding.setStore(data);
+        ItemClickListener<Store> clickListener = item -> mViewModel.onStoreClicked(item);
+        binding.setListener(clickListener);
     }
 
     @Override

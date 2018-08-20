@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData;
 import com.mahavira.arcanum.store.domain.entity.Store;
 import com.mahavira.arcanum.store.domain.usecase.GetPartnersUseCase;
 import com.mahavira.base.core.Resource;
+import com.mahavira.base.core.SingleLiveEvent;
 import com.mahavira.base.presentation.BaseViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -18,6 +19,8 @@ public class StoreListViewModel extends BaseViewModel {
 
     private final MutableLiveData<Resource<List<Store>>> mStoreData = new MutableLiveData<>();
 
+    private final SingleLiveEvent<Store> mStoreClicked = new SingleLiveEvent<>();
+
     private GetPartnersUseCase mGetPartnersUseCase;
 
     @Inject
@@ -27,6 +30,10 @@ public class StoreListViewModel extends BaseViewModel {
 
     public MutableLiveData<Resource<List<Store>>> getStoreData() {
         return mStoreData;
+    }
+
+    public SingleLiveEvent<Store> getStoreClicked() {
+        return mStoreClicked;
     }
 
     void attemptGetPartner() {
@@ -45,6 +52,10 @@ public class StoreListViewModel extends BaseViewModel {
     private void onFailedGetStore(final Throwable throwable) {
         hideLoading();
         mStoreData.setValue(Resource.error(null, throwable.getLocalizedMessage(), null));
+    }
+
+    void onStoreClicked(Store store) {
+        mStoreClicked.setValue(store);
     }
 
 }

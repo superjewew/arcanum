@@ -44,4 +44,8 @@ public abstract class BaseRecyclerAdapter<T, V extends ViewDataBinding>
 
     protected abstract V inflateBinding(ViewGroup parent);
 
+    public interface ItemClickListener<T> {
+        void onItemClicked(T item);
+    }
+
 }

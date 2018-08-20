@@ -13,11 +13,15 @@ import android.widget.Toast;
 import com.mahavira.arcanum.store.R;
 import com.mahavira.arcanum.store.databinding.FragmentStoreBinding;
 import com.mahavira.base.presentation.BaseFragment;
+import javax.inject.Inject;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class StoreListFragment extends BaseFragment<FragmentStoreBinding, StoreListViewModel> {
+
+    @Inject
+    StoreRouter mStoreRouter;
 
     private StoreListAdapter mAdapter;
 
@@ -56,6 +60,8 @@ public class StoreListFragment extends BaseFragment<FragmentStoreBinding, StoreL
             }
         });
 
+        getViewModel().getStoreClicked().observe(this, store -> mStoreRouter.goToStoreDetail(getActivity(), store));
+
         getViewModel().attemptGetPartner();
     }
 
@@ -65,7 +71,7 @@ public class StoreListFragment extends BaseFragment<FragmentStoreBinding, StoreL
     }
 
     private void setupAdapter() {
-        mAdapter = new StoreListAdapter(getActivity());
+        mAdapter = new StoreListAdapter(getActivity(), getViewModel());
     }
 
     public static Builder builder() {
