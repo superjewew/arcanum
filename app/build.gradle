@@ -71,6 +71,10 @@ dependencies {
     implementation libs.parcelerApi
     annotationProcessor libs.parceler
 
+    // ZXing
+    implementation libs.zxingCore
+    implementation libs.zxingAndroid
+
     implementation project(path: ':base')
     implementation project(path: ':login')
     implementation project(path: ':store')

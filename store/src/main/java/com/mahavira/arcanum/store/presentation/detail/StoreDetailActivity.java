@@ -3,6 +3,7 @@ package com.mahavira.arcanum.store.presentation.detail;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.mahavira.arcanum.store.BR;
 import com.mahavira.arcanum.store.R;
 import com.mahavira.arcanum.store.databinding.ActivityStoreDetailBinding;
@@ -46,7 +47,7 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
 
         updateAvailableGames();
 
-        getViewModel().getPlayHereClickedEvent().observe(this, __ -> mStoreRouter.goToPlayHereConfirmation(this));
+        getViewModel().getPlayHereClickedEvent().observe(this, __ -> new IntentIntegrator(this).initiateScan());
 
     }
 
