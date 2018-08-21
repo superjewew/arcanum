@@ -4,9 +4,9 @@ import java.util.List;
 
 public class User {
 
-    private String name;
-    private String email;
-    private String phone;
+    private String name = "";
+    private String email = "";
+    private String phone = "";
     private List<String> friends;
 
     public String getName() {

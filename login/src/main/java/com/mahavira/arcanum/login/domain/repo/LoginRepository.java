@@ -10,9 +10,10 @@ import io.reactivex.Single;
 
 /**
  * Created by norman on 13/07/18.
+ *
  */
 
 public interface LoginRepository {
     Single<AuthResult> login(String email, String password);
-    Completable register(User param);
+    Completable register(User param, String pass);
 }
