@@ -1,6 +1,7 @@
 package com.mahavira.arcanum.login.di;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.mahavira.arcanum.login.data.LoginRepoImpl;
 import com.mahavira.arcanum.login.domain.repo.LoginRepository;
 
@@ -19,7 +20,7 @@ public class LoginModule {
 
     @Provides
     @Singleton
-    LoginRepository provideLoginRepository(FirebaseAuth firebaseAuth) {
-        return new LoginRepoImpl(firebaseAuth);
+    LoginRepository provideLoginRepository(FirebaseAuth firebaseAuth, FirebaseFirestore firestore) {
+        return new LoginRepoImpl(firebaseAuth, firestore);
     }
 }

@@ -2,7 +2,7 @@ package com.mahavira.arcanum.login.presentation.feature;
 
 import android.os.Bundle;
 import android.widget.Toast;
-import com.android.databinding.library.baseAdapters.BR;
+import com.mahavira.arcanum.login.BR;
 import com.mahavira.arcanum.login.R;
 import com.mahavira.arcanum.login.databinding.ActivityLoginBinding;
 import com.mahavira.arcanum.login.domain.entity.AuthParam;
@@ -43,6 +43,8 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
                 }
             }
         });
+
+        getViewModel().getRegisterEvent().observe(this, __ -> mRouter.goToRegister(this));
 
         getDataBinding().setParam(new AuthParam("", ""));
 

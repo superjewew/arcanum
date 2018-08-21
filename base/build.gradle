@@ -44,10 +44,10 @@ dependencies {
 
     implementation libs.supportAppCompat
     implementation libs.supportV4
+    implementation libs.supportRecyclerView
     testImplementation libs.junit
     androidTestImplementation libs.supportTestRunner
     androidTestImplementation libs.espressoCore
-    implementation "com.google.android.gms:play-services-tasks:15.0.1"
 
     // Dagger
     implementation libs.dagger
@@ -73,4 +73,8 @@ dependencies {
     // Parceler
     implementation libs.parcelerApi
     annotationProcessor libs.parceler
+
+    // Firebase
+    implementation libs.firebaseFirestore
+
 }

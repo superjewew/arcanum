@@ -5,9 +5,12 @@ import android.content.Context;
 
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.mahavira.arcanum.login.presentation.LoginRouter;
 
 import com.mahavira.arcanum.router.LoginRouterImpl;
+import com.mahavira.arcanum.router.StoreRouterImpl;
+import com.mahavira.arcanum.store.presentation.StoreRouter;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -34,8 +37,18 @@ class AppModule {
     }
 
     @Provides
+    @Singleton
+    FirebaseFirestore provideFirebaseFirestore() {
+        return FirebaseFirestore.getInstance();
+    }
+
+    @Provides
     LoginRouter provideLoginRouter() {
         return new LoginRouterImpl();
     }
 
+    @Provides
+    StoreRouter provideStoreRouter() {
+        return new StoreRouterImpl();
+    }
 }

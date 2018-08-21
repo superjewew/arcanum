@@ -4,4 +4,9 @@
     <string name="login_password_hint">password</string>
     <string name="login_btn_txt">login</string>
     <string name="register_btn_txt">Sign Up</string>
+    <string name="register_email_hint">Email (Required)</string>
+    <string name="register_name_hint">Full Name (Required)</string>
+    <string name="register_password_hint">Password (Required)</string>
+    <string name="register_confirm_hint">Confirm Password</string>
+    <string name="register_dob_hint">Tanggal Lahir</string>
 </resources>

@@ -44,6 +44,7 @@ dependencies {
     implementation libs.supportAppCompat
     implementation libs.supportV4
     implementation libs.supportConstraintLayout
+    implementation libs.supportDesign
     testImplementation libs.junit
     androidTestImplementation libs.supportTestRunner
     androidTestImplementation libs.espressoCore
@@ -61,6 +62,7 @@ dependencies {
 
     // Firebase
     implementation libs.firebaseAuth
+    implementation libs.firebaseFirestore
     implementation 'com.github.frangsierra:rx2firebase:1.4.0'
 
     // RxJava

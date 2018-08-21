@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mahavira.arcanum.store">
+
+    <application
+        android:hardwareAccelerated="true" >
+        <activity android:name=".presentation.StoreListActivity" />
+        <activity android:name=".presentation.detail.StoreDetailActivity" />
+    </application>
+
+</manifest>
