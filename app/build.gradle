@@ -79,6 +79,7 @@ dependencies {
     implementation project(path: ':base')
     implementation project(path: ':login')
     implementation project(path: ':store')
+    implementation project(path: ':home')
 }
 
 apply plugin: 'com.google.gms.google-services'
