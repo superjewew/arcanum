@@ -4,10 +4,10 @@ import android.support.annotation.NonNull;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.mahavira.arcanum.login.domain.entity.User;
 import com.mahavira.arcanum.login.domain.repo.LoginRepository;
 
 import com.mahavira.base.core.BaseRepository;
+import com.mahavira.base.entity.User;
 import io.reactivex.Completable;
 import javax.inject.Inject;
 

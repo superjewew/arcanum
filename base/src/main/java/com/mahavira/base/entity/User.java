@@ -1,4 +1,4 @@
-package com.mahavira.arcanum.login.domain.entity;
+package com.mahavira.base.entity;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ public class User {
     private String email = "";
     private String phone = "";
     private List<String> friends;
+    private List<String> recentStores;
 
     public String getName() {
         return name;
@@ -39,5 +40,13 @@ public class User {
 
     public void setFriends(final List<String> friends) {
         this.friends = friends;
+    }
+
+    public List<String> getRecentStores() {
+        return recentStores;
+    }
+
+    public void setRecentStores(final List<String> recentStores) {
+        this.recentStores = recentStores;
     }
 }

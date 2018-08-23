@@ -5,7 +5,7 @@
     <data>
         <variable
             name="user"
-            type="com.mahavira.arcanum.login.domain.entity.User"/>
+            type="com.mahavira.base.entity.User"/>
         <variable
             name="secret"
             type="com.mahavira.arcanum.login.domain.entity.Pass"/>

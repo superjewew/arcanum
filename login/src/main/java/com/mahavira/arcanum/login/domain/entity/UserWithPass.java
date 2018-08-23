@@ -1,5 +1,7 @@
 package com.mahavira.arcanum.login.domain.entity;
 
+import com.mahavira.base.entity.User;
+
 /**
  * Created by norman on 20/08/18.
  *
