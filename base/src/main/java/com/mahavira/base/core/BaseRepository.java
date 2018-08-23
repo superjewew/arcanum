@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by norman on 16/08/18.
+ *
  */
 
 public class BaseRepository {
@@ -18,6 +19,14 @@ public class BaseRepository {
         return Maybe.create(
                 e -> ref.get()
                         .addOnCompleteListener(task -> e.onSuccess(task.getResult().toObjects(clazz)))
+                        .addOnFailureListener(e::onError));
+    }
+
+    @NonNull
+    protected <T> Maybe<T> getValue(@NonNull final DocumentReference ref, Class<T> clazz) {
+        return Maybe.create(
+                e -> ref.get()
+                        .addOnCompleteListener(task -> e.onSuccess(task.getResult().toObject(clazz)))
                         .addOnFailureListener(e::onError));
     }
 
