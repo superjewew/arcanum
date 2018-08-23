@@ -72,4 +72,15 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         getDataBinding().recentStoreList.setLayoutManager(new LinearLayoutManager(getActivity()));
         getDataBinding().recentStoreList.setAdapter(adapter);
     }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+
+        public HomeFragment build() {
+            return new HomeFragment();
+        }
+    }
 }
