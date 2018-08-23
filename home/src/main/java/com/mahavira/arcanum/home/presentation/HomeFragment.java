@@ -6,10 +6,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mahavira.arcanum.home.BR;
 import com.mahavira.arcanum.home.R;
 import com.mahavira.arcanum.home.databinding.FragmentHomeBinding;
 import com.mahavira.base.presentation.BaseFragment;
+import javax.inject.Inject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +20,9 @@ import com.mahavira.base.presentation.BaseFragment;
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel> {
 
     private RecentStoreAdapter mAdapter;
+
+    @Inject
+    FirebaseAuth mFirebaseAuth;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -52,7 +58,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             }
         });
 
-        getViewModel().attemptGetRecentStore("");
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        if(user != null) {
+            getViewModel().attemptGetRecentStore(user.getEmail());
+        }
     }
 
     private void setupAdapter() {

@@ -63,6 +63,7 @@ dependencies {
 
     // Firebase
     implementation libs.firebaseFirestore
+    implementation libs.firebaseAuth
     implementation 'com.github.frangsierra:rx2firebase:1.4.0'
 
     // RxJava
