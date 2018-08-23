@@ -1,5 +1,6 @@
 package com.mahavira.arcanum.login.domain.entity;
 
+import com.mahavira.base.entity.User;
 import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 

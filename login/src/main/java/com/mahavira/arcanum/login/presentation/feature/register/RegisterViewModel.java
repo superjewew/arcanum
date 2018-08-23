@@ -4,14 +4,13 @@ import android.arch.lifecycle.MutableLiveData;
 import android.databinding.ObservableField;
 import com.mahavira.arcanum.login.domain.entity.Pass;
 import com.mahavira.arcanum.login.domain.entity.RegisterValidator;
-import com.mahavira.arcanum.login.domain.entity.User;
 import com.mahavira.arcanum.login.domain.entity.UserWithPass;
 import com.mahavira.arcanum.login.domain.usecase.RegisterUseCase;
 import com.mahavira.base.core.Resource;
+import com.mahavira.base.entity.User;
 import com.mahavira.base.presentation.BaseViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 /**

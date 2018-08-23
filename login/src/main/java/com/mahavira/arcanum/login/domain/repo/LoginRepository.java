@@ -3,7 +3,7 @@ package com.mahavira.arcanum.login.domain.repo;
 
 import com.google.firebase.auth.AuthResult;
 
-import com.mahavira.arcanum.login.domain.entity.User;
+import com.mahavira.base.entity.User;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
