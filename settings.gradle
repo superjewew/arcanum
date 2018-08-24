@@ -1,1 +1,1 @@
-include ':app', ':base', ':login', ':store', ':home', ':dashboard'
+include ':app', ':base', ':login', ':store', ':home', ':dashboard', ':product'

@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/dashboard" />
             <option value="$PROJECT_DIR$/home" />
             <option value="$PROJECT_DIR$/login" />
+            <option value="$PROJECT_DIR$/product" />
             <option value="$PROJECT_DIR$/store" />
           </set>
         </option>
