@@ -12,7 +12,7 @@ import javax.inject.Singleton;
  *
  */
 
-@Module
+@Module(includes = {ProductBuilderModule.class})
 public class ProductModule {
 
     @Provides
