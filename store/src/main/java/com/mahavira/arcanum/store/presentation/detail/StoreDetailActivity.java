@@ -56,7 +56,6 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
 
     private void updateAvailableGames() {
         mAdapter.addData(mStore.getBorrowedGames());
-        mAdapter.notifyDataSetChanged();
     }
 
     private void setupAdapter() {
