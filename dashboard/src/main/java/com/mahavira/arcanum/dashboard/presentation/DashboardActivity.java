@@ -2,6 +2,7 @@ package com.mahavira.arcanum.dashboard.presentation;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import com.mahavira.arcanum.dashboard.BR;
 import com.mahavira.arcanum.dashboard.R;
 import com.mahavira.arcanum.dashboard.databinding.ActivityDashboardBinding;
@@ -17,6 +18,14 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
 
     public static final int NAV_FRIENDS_INDEX = 2;
 
+    final Fragment fragment1 = HomeFragment.builder().build();
+
+    final Fragment fragment2 = StoreListFragment.builder().build();
+
+    Fragment active = fragment1;
+
+    private final FragmentManager mFragmentManager = getSupportFragmentManager();
+
     @Override
     public int getViewModelBindingVariable() {
         return BR.viewModel;
@@ -31,14 +40,17 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mFragmentManager.beginTransaction().add(R.id.container, fragment2, "2").hide(fragment2).commit();
+        mFragmentManager.beginTransaction().add(R.id.container, fragment1, "1").commit();
+
         getViewModel().getNavigationEvent().observe(this, navIndex -> {
-            if(navIndex != null) {
+            if (navIndex != null) {
                 switch (navIndex) {
                     case NAV_HOME_INDEX:
-                        openFragment(HomeFragment.builder().build());
+                        showNewFragment(fragment1);
                         break;
                     case NAV_STORES_INDEX:
-                        openFragment(StoreListFragment.builder().build());
+                        showNewFragment(fragment2);
                         break;
                     case NAV_FRIENDS_INDEX:
                         break;
@@ -47,10 +59,8 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
         });
     }
 
-    private void openFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction()
-            .replace(R.id.container, fragment)
-            .addToBackStack(null)
-            .commit();
+    private void showNewFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().hide(active).show(fragment).commit();
+        active = fragment;
     }
 }
