@@ -61,4 +61,24 @@ dependencies {
     // DataBinding
     implementation libs.databindingBaseLibrary
     implementation libs.databindingLibrary
+
+    // Architecture Component Lifecycle
+    implementation libs.archLifecycleRuntime
+    implementation libs.archLifecycleExtensions
+    implementation libs.archLifecycleCommonJava8
+    annotationProcessor libs.archLifecycleCompiler
+
+    // Firebase
+    implementation libs.firebaseCore
+    implementation libs.firebaseFirestore
+
+    // Parceler
+    implementation libs.parcelerApi
+    annotationProcessor libs.parceler
+
+    // RxJava
+    implementation libs.rxAndroid
+    implementation libs.rxJava
+
+    compile project(path: ':base')
 }

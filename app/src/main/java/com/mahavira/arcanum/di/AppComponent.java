@@ -5,6 +5,7 @@ import com.mahavira.arcanum.BaseApplication;
 import com.mahavira.arcanum.dashboard.di.DashboardModule;
 import com.mahavira.arcanum.home.di.HomeModule;
 import com.mahavira.arcanum.login.di.LoginModule;
+import com.mahavira.arcanum.product.di.ProductModule;
 import com.mahavira.arcanum.store.di.StoreModule;
 import com.mahavira.base.di.BaseModule;
 import dagger.BindsInstance;
@@ -25,7 +26,8 @@ import javax.inject.Singleton;
         LoginModule.class,
         StoreModule.class,
         HomeModule.class,
-        DashboardModule.class
+        DashboardModule.class,
+        ProductModule.class
 })
 public interface AppComponent {
 
