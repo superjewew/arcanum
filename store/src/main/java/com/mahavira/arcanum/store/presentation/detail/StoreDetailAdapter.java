@@ -18,8 +18,11 @@ public class StoreDetailAdapter extends BaseRecyclerAdapter<String, ItemStoreDet
 
     private Context mContext;
 
-    StoreDetailAdapter(Context context) {
+    private StoreDetailViewModel mViewModel;
+
+    StoreDetailAdapter(Context context, StoreDetailViewModel viewModel) {
         mContext = context;
+        mViewModel = viewModel;
     }
 
     @Override
@@ -29,7 +32,9 @@ public class StoreDetailAdapter extends BaseRecyclerAdapter<String, ItemStoreDet
 
     @Override
     protected void bind(final ItemStoreDetailGameListBinding binding, final String data) {
+        ItemClickListener<String> listener = item -> mViewModel.productClicked(item);
         binding.setProduct(data);
+        binding.setListener(listener);
     }
 
     @Override

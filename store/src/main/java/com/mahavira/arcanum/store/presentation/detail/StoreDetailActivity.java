@@ -52,6 +52,9 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
 
         getViewModel().getPlayHereClickedEvent().observe(this, __ -> new IntentIntegrator(this).initiateScan());
 
+        getViewModel().getProductClickedEvent()
+                .observe(this, productName -> mStoreRouter.goToProductDetail(this, productName));
+
     }
 
     private void updateAvailableGames() {
@@ -59,7 +62,7 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
     }
 
     private void setupAdapter() {
-        mAdapter = new StoreDetailAdapter(this);
+        mAdapter = new StoreDetailAdapter(this, getViewModel());
     }
 
     private void setupRecyclerView(final StoreDetailAdapter adapter) {
@@ -78,8 +81,8 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
+        if (result != null) {
+            if (result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();

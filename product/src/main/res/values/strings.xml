@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">product</string>
+    <string name="how_to_play_caption_txt">How To Play</string>
+    <string name="game_component_caption_txt">Game Component</string>
 </resources>
