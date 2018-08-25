@@ -11,7 +11,7 @@ import javax.inject.Singleton;
  * Created by norman on 25/08/18.
  */
 
-@Module
+@Module(includes = {FriendBuilderModule.class})
 public class FriendModule {
 
     @Provides
