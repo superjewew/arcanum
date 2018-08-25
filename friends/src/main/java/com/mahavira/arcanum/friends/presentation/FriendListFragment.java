@@ -4,6 +4,7 @@ package com.mahavira.arcanum.friends.presentation;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,6 +20,8 @@ public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, 
 
     @Inject
     FirebaseAuth mAuth;
+
+    private OnlineFriendListAdapter mOnlineAdapter;
 
     public FriendListFragment() {
         // Required empty public constructor
@@ -39,11 +42,14 @@ public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, 
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        setupAdapters();
+        setupRecyclerViews();
+
         getViewModel().getOnlineFriends().observe(this, listResource -> {
             if(listResource != null) {
                 switch (listResource.status) {
                     case SUCCESS:
-                        Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                        mOnlineAdapter.addUserData(listResource.data);
                         break;
                     case ERROR:
                         Toast.makeText(getActivity(), "Error loading friends", Toast.LENGTH_SHORT).show();
@@ -56,6 +62,20 @@ public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, 
         if(user != null) {
             getViewModel().attemptGetOnlineFriends(user.getEmail());
         }
+    }
+
+    private void setupRecyclerViews() {
+        getDataBinding().currentlyPlayingList.setLayoutManager(new LinearLayoutManager(getActivity()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
+        getDataBinding().currentlyPlayingList.setAdapter(mOnlineAdapter);
+    }
+
+    private void setupAdapters() {
+        mOnlineAdapter = new OnlineFriendListAdapter(getActivity());
     }
 
     public static Builder builder() {

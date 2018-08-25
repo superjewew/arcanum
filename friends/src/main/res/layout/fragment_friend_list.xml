@@ -1,14 +1,42 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
     </data>
 
-    <FrameLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.mahavira.arcanum.friends.presentation.FriendListFragment">
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/currently_playing_caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/currently_playing_caption_txt"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/currently_playing_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/currently_playing_caption"/>
+
+        <TextView
+            android:id="@+id/all_friends_caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/all_friends_caption_txt"
+            app:layout_constraintTop_toBottomOf="@id/currently_playing_list"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/all_friends_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/all_friends_caption"/>
+
+    </android.support.constraint.ConstraintLayout>
 </layout>
