@@ -22,6 +22,19 @@ android {
         }
     }
 
+    dataBinding {
+        enabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        multiDexEnabled true
+    }
+
 }
 
 dependencies {
@@ -58,4 +71,9 @@ dependencies {
     // Firebase
     implementation libs.firebaseFirestore
 
+    // RxJava
+    implementation libs.rxAndroid
+    implementation libs.rxJava
+
+    implementation project(path: ':base')
 }
