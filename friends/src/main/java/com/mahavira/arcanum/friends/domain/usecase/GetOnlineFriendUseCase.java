@@ -12,7 +12,7 @@ import javax.inject.Inject;
  * Created by norman on 25/08/18.
  */
 
-public class GetOnlineFriendUseCase implements BaseUseCaseWithParam< List<String>, List<User>> {
+public class GetOnlineFriendUseCase implements BaseUseCaseWithParam<String, List<User>> {
 
     private FriendRepository mRepository;
 
@@ -22,18 +22,18 @@ public class GetOnlineFriendUseCase implements BaseUseCaseWithParam< List<String
     }
 
     @Override
-    public Single<List<User>> execute(List<String> friends) {
-        return mRepository.getOnlineUser().flatMap(users -> filterOnlyFriend(users, friends));
+    public Single<List<User>> execute(String email) {
+        return mRepository.getOnlineUser().zipWith(mRepository.getCurrentUser(email), (users, user) -> filterOnlyFriend(users, user.getFriends()));
     }
 
-    private Single<List<User>> filterOnlyFriend(List<User> users, List<String> friends) {
+    private List<User> filterOnlyFriend(List<User> users, List<String> friends) {
         List<User> usersToBeRemoved = new ArrayList<>();
         for (User user : users) {
-            if(!friends.contains(user.getEmail())) {
+            if (!friends.contains(user.getEmail())) {
                 usersToBeRemoved.add(user);
             }
         }
         users.removeAll(usersToBeRemoved);
-        return Single.just(users);
+        return users;
     }
 }

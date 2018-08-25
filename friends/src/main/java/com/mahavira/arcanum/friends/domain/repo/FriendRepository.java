@@ -12,4 +12,5 @@ public interface FriendRepository {
 
     Single<List<User>> getOnlineUser();
 
+    Single<User> getCurrentUser(String email);
 }

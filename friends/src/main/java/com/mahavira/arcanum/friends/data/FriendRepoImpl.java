@@ -2,6 +2,7 @@ package com.mahavira.arcanum.friends.data;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.mahavira.arcanum.friends.domain.repo.FriendRepository;
+import com.mahavira.base.core.BaseRepository;
 import com.mahavira.base.entity.User;
 import io.reactivex.Single;
 import java.util.List;
@@ -11,7 +12,7 @@ import javax.inject.Inject;
  * Created by norman on 25/08/18.
  */
 
-public class FriendRepoImpl implements FriendRepository {
+public class FriendRepoImpl extends BaseRepository implements FriendRepository {
 
     private FirebaseFirestore mFirestore;
 
@@ -22,6 +23,11 @@ public class FriendRepoImpl implements FriendRepository {
 
     @Override
     public Single<List<User>> getOnlineUser() {
-        return null;
+        return query(mFirestore.collection("users"), "isPlaying", true, User.class).toSingle();
+    }
+
+    @Override
+    public Single<User> getCurrentUser(String email) {
+        return getValue(mFirestore.collection("users").document(email), User.class).toSingle();
     }
 }

@@ -70,6 +70,7 @@ dependencies {
 
     // Firebase
     implementation libs.firebaseFirestore
+    implementation libs.firebaseAuth
 
     // RxJava
     implementation libs.rxAndroid
