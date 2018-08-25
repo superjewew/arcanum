@@ -9,6 +9,8 @@ public class User {
     private String phone = "";
     private List<String> friends;
     private List<String> recentStores;
+    private boolean isPlaying;
+    private String playingAt;
 
     public String getName() {
         return name;
@@ -48,5 +50,21 @@ public class User {
 
     public void setRecentStores(final List<String> recentStores) {
         this.recentStores = recentStores;
+    }
+
+    public boolean isPlaying() {
+        return isPlaying;
+    }
+
+    public void setPlaying(final boolean playing) {
+        isPlaying = playing;
+    }
+
+    public String getPlayingAt() {
+        return playingAt;
+    }
+
+    public void setPlayingAt(final String playingAt) {
+        this.playingAt = playingAt;
     }
 }
