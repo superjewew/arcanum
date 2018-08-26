@@ -23,7 +23,7 @@ public class FriendRepoImpl extends BaseRepository implements FriendRepository {
 
     @Override
     public Single<List<User>> getOnlineUser() {
-        return query(mFirestore.collection("users"), "isPlaying", true, User.class).toSingle();
+        return getValue(mFirestore.collection("users"), User.class).toSingle();
     }
 
     @Override

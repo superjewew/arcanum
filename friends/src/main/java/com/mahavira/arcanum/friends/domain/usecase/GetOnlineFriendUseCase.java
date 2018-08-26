@@ -5,6 +5,7 @@ import com.mahavira.base.core.BaseUseCaseWithParam;
 import com.mahavira.base.entity.User;
 import io.reactivex.Single;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -34,6 +35,19 @@ public class GetOnlineFriendUseCase implements BaseUseCaseWithParam<String, List
             }
         }
         users.removeAll(usersToBeRemoved);
+
+        List<User> offline = new ArrayList<>();
+        for(User user : users) {
+            if(!user.isPlaying()) {
+                offline.add(user);
+            }
+        }
+
+        users.removeAll(offline);
+        Collections.sort(users, (user1, user2) -> user1.getName().compareTo(user2.getName()));
+        Collections.sort(offline, (user, t1) -> user.getName().compareTo(t1.getName()));
+        users.addAll(offline);
+
         return users;
     }
 }
