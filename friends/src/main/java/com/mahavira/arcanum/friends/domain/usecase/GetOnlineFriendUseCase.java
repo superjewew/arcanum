@@ -43,6 +43,7 @@ public class GetOnlineFriendUseCase implements BaseUseCaseWithParam<String, List
             }
         }
 
+        // Sort the list based on playing status and alphabetical order
         users.removeAll(offline);
         Collections.sort(users, (user1, user2) -> user1.getName().compareTo(user2.getName()));
         Collections.sort(offline, (user, t1) -> user.getName().compareTo(t1.getName()));
