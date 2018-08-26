@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +41,12 @@ public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, 
     }
 
     @Override
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -62,6 +70,12 @@ public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, 
         if(user != null) {
             getViewModel().attemptGetOnlineFriends(user.getEmail());
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_friends, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void setupRecyclerViews() {
