@@ -4,21 +4,25 @@ package com.mahavira.arcanum.friends.presentation;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mahavira.arcanum.friends.R;
 import com.mahavira.arcanum.friends.databinding.FragmentFriendListBinding;
+import com.mahavira.arcanum.friends.presentation.AddFriendDialogFragment.NameDialogListener;
 import com.mahavira.base.presentation.BaseFragment;
 import javax.inject.Inject;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, FriendListViewModel> {
+public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, FriendListViewModel> implements
+        NameDialogListener {
 
     @Inject
     FirebaseAuth mAuth;
@@ -73,9 +77,33 @@ public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, 
     }
 
     @Override
+    public void onAdd(final String input) {
+        Toast.makeText(getActivity(), "Add Button Clicked", Toast.LENGTH_SHORT).show();
+        getViewModel().attemptAddFriend(input);
+    }
+
+    @Override
     public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
         inflater.inflate(R.menu.menu_friends, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        int i = item.getItemId();
+        if (i == R.id.add_action) {
+            showAddFriendDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showAddFriendDialog() {
+        FragmentManager fm = getFragmentManager();
+        AddFriendDialogFragment dialog = AddFriendDialogFragment.newInstance();
+        dialog.setTargetFragment(FriendListFragment.this, 300);
+        if (fm != null) {
+            dialog.show(fm, "add_friend_dialog");
+        }
     }
 
     private void setupRecyclerViews() {

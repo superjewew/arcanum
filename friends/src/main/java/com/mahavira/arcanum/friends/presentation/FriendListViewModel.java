@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 /**
  * Created by norman on 25/08/18.
+ *
  */
 
 public class FriendListViewModel extends BaseViewModel {
@@ -31,19 +32,22 @@ public class FriendListViewModel extends BaseViewModel {
 
     void attemptGetOnlineFriends(String email) {
         mDisposable.add(mGetOnlineFriendUseCase.execute(email)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .doOnSubscribe(__ -> doOnSubscribe())
-        .subscribe(this::onGetOnlineFriendsSuccess, this::onGetOnlineFriendsFailed));
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(__ -> doOnSubscribe())
+                .doFinally(this::hideLoading)
+                .subscribe(this::onGetOnlineFriendsSuccess, this::onGetOnlineFriendsFailed));
+    }
+
+    void attemptAddFriend(final String input) {
+
     }
 
     private void onGetOnlineFriendsSuccess(final List<User> users) {
-        hideLoading();
         mOnlineFriends.setValue(Resource.success(users));
     }
 
     private void onGetOnlineFriendsFailed(final Throwable throwable) {
-        hideLoading();
         mOnlineFriends.setValue(Resource.error(null, throwable.getLocalizedMessage(), null));
     }
 

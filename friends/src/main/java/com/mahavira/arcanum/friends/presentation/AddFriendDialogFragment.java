@@ -1,8 +1,9 @@
 package com.mahavira.arcanum.friends.presentation;
 
-import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,14 @@ import com.mahavira.arcanum.friends.R;
 
 /**
  * Created by norman on 26/08/18.
+ *
  */
 
 public class AddFriendDialogFragment extends DialogFragment {
 
     private Button mAddButton;
+
+    private Button mCancelButton;
 
     private EditText mNameEt;
 
@@ -29,16 +33,17 @@ public class AddFriendDialogFragment extends DialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
             final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.dialog_add_friend, container);
     }
 
     @Override
-    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         mAddButton = view.findViewById(R.id.add_btn);
+        mCancelButton = view.findViewById(R.id.cancel_btn);
         mNameEt = view.findViewById(R.id.name_friend_et);
 
         getDialog().setTitle("Add Friend");
@@ -47,11 +52,14 @@ public class AddFriendDialogFragment extends DialogFragment {
         getDialog().getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         mAddButton.setOnClickListener(v -> sendBackResult());
+        mCancelButton.setOnClickListener(v -> dismiss());
     }
 
     private void sendBackResult() {
         NameDialogListener listener = (NameDialogListener) getTargetFragment();
-        listener.onAdd(mNameEt.getText().toString());
+        if (listener != null) {
+            listener.onAdd(mNameEt.getText().toString());
+        }
         dismiss();
     }
 
