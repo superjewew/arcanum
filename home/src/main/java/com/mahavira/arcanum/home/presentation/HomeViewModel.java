@@ -30,19 +30,18 @@ public class HomeViewModel extends BaseViewModel {
 
     void attemptGetRecentStore(String email) {
         mDisposable.add(mGetRecentStoreUseCase.execute(email)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .doOnSubscribe(__ -> doOnSubscribe())
-        .subscribe(this::onGetRecentSuccess, this::onGetRecentFailed));
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(__ -> doOnSubscribe())
+                .doFinally(this::hideLoading)
+                .subscribe(this::onGetRecentSuccess, this::onGetRecentFailed));
     }
 
     private void onGetRecentSuccess(final List<String> strings) {
-        hideLoading();
         mRecentStoreData.setValue(Resource.success(strings));
     }
 
     private void onGetRecentFailed(final Throwable throwable) {
-        hideLoading();
         mRecentStoreData.setValue(Resource.error(null, throwable.getLocalizedMessage(), null));
     }
 
