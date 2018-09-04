@@ -78,5 +78,9 @@ dependencies {
     implementation libs.zxingCore
     implementation libs.zxingAndroid
 
+    // SpongyCastle
+    implementation 'com.madgag.spongycastle:core:1.54.0.0'
+    implementation 'com.madgag.spongycastle:prov:1.54.0.0'
+
     implementation project(path: ':base')
 }

@@ -21,6 +21,7 @@ ext {
     parcelerVersion = '1.1.11'
     zxingCoreVersion = '3.3.0'
     zxingAndroidVersion = '3.3.0@aar'
+    spongyCastleVersion = '1.54.0.0'
 
     libraries = [
             supportV4             : "com.android.support:support-v4:$supportLibraryVersion",
@@ -55,7 +56,9 @@ ext {
             parcelerApi           : "org.parceler:parceler-api:$parcelerVersion",
             parceler              : "org.parceler:parceler:$parcelerVersion",
             zxingCore             : "com.google.zxing:core:$zxingCoreVersion",
-            zxingAndroid          : "com.journeyapps:zxing-android-embedded:$zxingAndroidVersion"
+            zxingAndroid          : "com.journeyapps:zxing-android-embedded:$zxingAndroidVersion",
+            spongyCastleCore      : "com.madgag.spongycastle:core:$spongyCastleVersion",
+            spongyCastleProv      : "com.madgag.spongycastle:prov:$spongyCastleVersion"
 
     ]
 }
