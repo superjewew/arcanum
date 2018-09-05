@@ -10,10 +10,18 @@ import com.google.zxing.integration.android.IntentResult;
 import com.mahavira.arcanum.store.BR;
 import com.mahavira.arcanum.store.R;
 import com.mahavira.arcanum.store.databinding.ActivityStoreDetailBinding;
+import com.mahavira.arcanum.store.domain.entity.EncryptedString;
 import com.mahavira.arcanum.store.domain.entity.Store;
 import com.mahavira.arcanum.store.presentation.StoreRouter;
 import com.mahavira.base.presentation.BaseActivity;
 import com.mahavira.base.presentation.ExtraInjectable;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.inject.Inject;
 import org.parceler.Parcels;
 
@@ -86,6 +94,24 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                EncryptedString s = new EncryptedString(result.getContents());
+                try {
+                    String email = s.decryptMsg().getValue();
+                } catch (NoSuchPaddingException e) {
+                    e.printStackTrace();
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                } catch (InvalidKeySpecException e) {
+                    e.printStackTrace();
+                } catch (InvalidKeyException e) {
+                    e.printStackTrace();
+                } catch (BadPaddingException e) {
+                    e.printStackTrace();
+                } catch (IllegalBlockSizeException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);

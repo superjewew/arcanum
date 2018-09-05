@@ -78,9 +78,10 @@ dependencies {
     implementation libs.zxingCore
     implementation libs.zxingAndroid
 
-    // SpongyCastle
-    implementation 'com.madgag.spongycastle:core:1.54.0.0'
-    implementation 'com.madgag.spongycastle:prov:1.54.0.0'
+    implementation 'com.github.tozny:java-aes-crypto:1.1.0'
+
+    implementation libs.spongyCastleCore
+    implementation libs.spongyCastleProv
 
     implementation project(path: ':base')
 }
