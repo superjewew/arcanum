@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.widget.Toast;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.mahavira.arcanum.store.BR;
@@ -33,6 +35,9 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
     private StoreDetailAdapter mAdapter;
 
     private Store mStore;
+
+    @Inject
+    FirebaseAuth mFirebaseAuth;
 
     @Inject
     StoreRouter mStoreRouter;
@@ -94,9 +99,12 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                FirebaseUser user = mFirebaseAuth.getCurrentUser();
+
                 EncryptedString s = new EncryptedString(result.getContents());
                 try {
-                    String email = s.decryptMsg().getValue();
+                    String storeEmail = s.decryptMsg().getValue();
+                    getViewModel().attemptSetVisit(user.getEmail(), storeEmail);
                 } catch (NoSuchPaddingException e) {
                     e.printStackTrace();
                 } catch (NoSuchAlgorithmException e) {
@@ -110,6 +118,8 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
                 } catch (IllegalBlockSizeException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

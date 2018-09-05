@@ -40,6 +40,14 @@ public class BaseRepository {
     }
 
     @NonNull
+    protected <T> Maybe<List<T>> query(@Nonnull final CollectionReference ref, String where, String value, Class<T> clazz) {
+        return Maybe.create(
+                e -> ref.whereEqualTo(where, value)
+                        .get()
+                        .addOnCompleteListener(task -> e.onSuccess(task.getResult().toObjects(clazz))));
+    }
+
+    @NonNull
     protected Completable setValue(@NonNull final DocumentReference ref, final Object value) {
         return Completable.create(
                 e -> ref.set(value)
