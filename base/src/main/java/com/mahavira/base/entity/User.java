@@ -1,5 +1,7 @@
 package com.mahavira.base.entity;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class User {
@@ -8,7 +10,7 @@ public class User {
     private String email = "";
     private String phone = "";
     private List<String> friends;
-    private List<String> recentStores;
+    private List<String> recentStores = new ArrayList<>();
     private boolean isPlaying;
     private String playingAt;
 
@@ -48,8 +50,13 @@ public class User {
         return recentStores;
     }
 
-    public void setRecentStores(final List<String> recentStores) {
-        this.recentStores = recentStores;
+    public void addRecentStores(final String recentStore) {
+        if(recentStores.contains(recentStore)) {
+            recentStores.remove(recentStore);
+        }
+        Collections.reverse(recentStores);
+        recentStores.add(recentStore);
+        Collections.reverse(recentStores);
     }
 
     public boolean isPlaying() {

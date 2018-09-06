@@ -46,6 +46,7 @@ public class StoreRepoImpl extends BaseRepository implements StoreRepository {
         User user = users.get(0);
         Store store = stores.get(0);
         user.setPlayingAt(store.getName());
+        user.addRecentStores(store.getEmail());
         return user;
     }
 
