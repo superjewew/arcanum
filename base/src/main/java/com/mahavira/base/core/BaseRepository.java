@@ -15,6 +15,8 @@ import javax.annotation.Nonnull;
 
 public class BaseRepository {
 
+    protected static final String USER_COLLECTION = "users";
+
     @NonNull
     protected <T> Maybe<List<T>> getValue(@NonNull final CollectionReference ref, Class<T> clazz) {
         return Maybe.create(

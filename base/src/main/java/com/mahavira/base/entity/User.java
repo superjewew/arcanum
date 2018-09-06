@@ -1,5 +1,6 @@
 package com.mahavira.base.entity;
 
+import com.mahavira.base.exception.FriendAlreadyAddedException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +10,7 @@ public class User {
     private String name = "";
     private String email = "";
     private String phone = "";
-    private List<String> friends;
+    private List<String> friends = new ArrayList<>();
     private List<String> recentStores = new ArrayList<>();
     private boolean isPlaying;
     private String playingAt;
@@ -42,8 +43,11 @@ public class User {
         return friends;
     }
 
-    public void setFriends(final List<String> friends) {
-        this.friends = friends;
+    public void addFriend(final String friend) {
+        if(friends.contains(friend)) {
+            throw new FriendAlreadyAddedException();
+        }
+        friends.add(friend);
     }
 
     public List<String> getRecentStores() {

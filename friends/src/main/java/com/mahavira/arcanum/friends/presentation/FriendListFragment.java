@@ -70,6 +70,21 @@ public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, 
             }
         });
 
+        getViewModel().getAddFriendResult().observe(this, result -> {
+            if(result != null) {
+                switch(result.status) {
+                    case SUCCESS: {
+                        Toast.makeText(getActivity(), "Friend Succesfully Added", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    case ERROR: {
+                        Toast.makeText(getActivity(), "Add Friend Failed, " + result.message, Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                }
+            }
+        });
+
         FirebaseUser user = mAuth.getCurrentUser();
         if(user != null) {
             getViewModel().attemptGetOnlineFriends(user.getEmail());
@@ -78,8 +93,10 @@ public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, 
 
     @Override
     public void onAdd(final String input) {
-        Toast.makeText(getActivity(), "Add Button Clicked", Toast.LENGTH_SHORT).show();
-        getViewModel().attemptAddFriend(input);
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null) {
+            getViewModel().attemptAddFriend(user.getEmail(), input);
+        }
     }
 
     @Override
