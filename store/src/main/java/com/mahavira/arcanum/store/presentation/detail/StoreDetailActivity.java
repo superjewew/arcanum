@@ -98,7 +98,6 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
             if (result.getContents() == null) {
                 Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 FirebaseUser user = mFirebaseAuth.getCurrentUser();
 
                 EncryptedString s = new EncryptedString(result.getContents());
