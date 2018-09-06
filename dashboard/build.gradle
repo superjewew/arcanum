@@ -66,4 +66,5 @@ dependencies {
     implementation project(path: ':base')
     implementation project(path: ':store')
     implementation project(path: ':home')
+    implementation project(path: ':friends')
 }

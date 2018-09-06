@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import com.mahavira.arcanum.dashboard.BR;
 import com.mahavira.arcanum.dashboard.R;
 import com.mahavira.arcanum.dashboard.databinding.ActivityDashboardBinding;
+import com.mahavira.arcanum.friends.presentation.FriendListFragment;
 import com.mahavira.arcanum.home.presentation.HomeFragment;
 import com.mahavira.arcanum.store.presentation.StoreListFragment;
 import com.mahavira.base.presentation.BaseActivity;
@@ -21,6 +22,8 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
     final Fragment fragment1 = HomeFragment.builder().build();
 
     final Fragment fragment2 = StoreListFragment.builder().build();
+
+    final Fragment fragment3 = FriendListFragment.builder().build();
 
     Fragment active = fragment1;
 
@@ -40,6 +43,7 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mFragmentManager.beginTransaction().add(R.id.container, fragment3, "3").hide(fragment3).commit();
         mFragmentManager.beginTransaction().add(R.id.container, fragment2, "2").hide(fragment2).commit();
         mFragmentManager.beginTransaction().add(R.id.container, fragment1, "1").commit();
 
@@ -53,6 +57,7 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
                         showNewFragment(fragment2);
                         break;
                     case NAV_FRIENDS_INDEX:
+                        showNewFragment(fragment3);
                         break;
                 }
             }

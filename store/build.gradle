@@ -78,5 +78,10 @@ dependencies {
     implementation libs.zxingCore
     implementation libs.zxingAndroid
 
+    implementation 'com.github.tozny:java-aes-crypto:1.1.0'
+
+    implementation libs.spongyCastleCore
+    implementation libs.spongyCastleProv
+
     implementation project(path: ':base')
 }

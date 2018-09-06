@@ -1,0 +1,80 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        multiDexEnabled true
+    }
+
+}
+
+dependencies {
+    def libs = rootProject.ext.libraries
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation libs.supportAppCompat
+    implementation libs.supportV4
+    implementation libs.supportConstraintLayout
+    implementation libs.supportRecyclerView
+    implementation libs.supportDesign
+    testImplementation libs.junit
+    androidTestImplementation libs.supportTestRunner
+    androidTestImplementation libs.espressoCore
+
+    // Dagger
+    implementation libs.dagger
+    implementation libs.daggerAndroid
+    implementation libs.daggerAndroidSupport
+    annotationProcessor libs.daggerCompiler
+    annotationProcessor libs.daggerAndroidProcessor
+
+    // DataBinding
+    implementation libs.databindingBaseLibrary
+    implementation libs.databindingLibrary
+
+    // Architecture Component Lifecycle
+    implementation libs.archLifecycleRuntime
+    implementation libs.archLifecycleExtensions
+    implementation libs.archLifecycleCommonJava8
+    annotationProcessor libs.archLifecycleCompiler
+
+    // Firebase
+    implementation libs.firebaseFirestore
+    implementation libs.firebaseAuth
+
+    // RxJava
+    implementation libs.rxAndroid
+    implementation libs.rxJava
+
+    implementation project(path: ':base')
+}

@@ -3,6 +3,7 @@ package com.mahavira.arcanum.di;
 import android.app.Application;
 import com.mahavira.arcanum.BaseApplication;
 import com.mahavira.arcanum.dashboard.di.DashboardModule;
+import com.mahavira.arcanum.friends.di.FriendModule;
 import com.mahavira.arcanum.home.di.HomeModule;
 import com.mahavira.arcanum.login.di.LoginModule;
 import com.mahavira.arcanum.product.di.ProductModule;
@@ -27,7 +28,8 @@ import javax.inject.Singleton;
         StoreModule.class,
         HomeModule.class,
         DashboardModule.class,
-        ProductModule.class
+        ProductModule.class,
+        FriendModule.class
 })
 public interface AppComponent {
 

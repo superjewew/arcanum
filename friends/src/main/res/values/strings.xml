@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">friends</string>
+    <string name="currently_playing_caption_txt">Currently Playing</string>
+    <string name="all_friends_caption_txt">All Friends</string>
+    <string name="add_friends_menu_txt">Add Friends</string>
+    <string name="name_email_hint">name/email</string>
+    <string name="add_button_txt">Add</string>
+    <string name="cancel_button_txt">Cancel</string>
+</resources>

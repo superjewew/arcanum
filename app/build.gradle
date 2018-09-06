@@ -82,6 +82,7 @@ dependencies {
     implementation project(path: ':home')
     implementation project(path: ':dashboard')
     implementation project(path: ':product')
+    implementation project(path: ':friends')
 }
 
 apply plugin: 'com.google.gms.google-services'

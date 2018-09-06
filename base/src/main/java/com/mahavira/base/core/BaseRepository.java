@@ -6,6 +6,7 @@ import com.google.firebase.firestore.DocumentReference;
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import java.util.List;
+import javax.annotation.Nonnull;
 
 /**
  * Created by norman on 16/08/18.
@@ -13,6 +14,8 @@ import java.util.List;
  */
 
 public class BaseRepository {
+
+    protected static final String USER_COLLECTION = "users";
 
     @NonNull
     protected <T> Maybe<List<T>> getValue(@NonNull final CollectionReference ref, Class<T> clazz) {
@@ -28,6 +31,22 @@ public class BaseRepository {
                 e -> ref.get()
                         .addOnCompleteListener(task -> e.onSuccess(task.getResult().toObject(clazz)))
                         .addOnFailureListener(e::onError));
+    }
+
+    @NonNull
+    protected <T> Maybe<List<T>> query(@Nonnull final CollectionReference ref, String where, boolean value, Class<T> clazz) {
+        return Maybe.create(
+                e -> ref.whereEqualTo(where, value)
+                        .get()
+                        .addOnCompleteListener(task -> e.onSuccess(task.getResult().toObjects(clazz))));
+    }
+
+    @NonNull
+    protected <T> Maybe<List<T>> query(@Nonnull final CollectionReference ref, String where, String value, Class<T> clazz) {
+        return Maybe.create(
+                e -> ref.whereEqualTo(where, value)
+                        .get()
+                        .addOnCompleteListener(task -> e.onSuccess(task.getResult().toObjects(clazz))));
     }
 
     @NonNull
