@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.mahavira.arcanum.friends.BR;
 import com.mahavira.arcanum.friends.R;
 import com.mahavira.arcanum.friends.databinding.FragmentFriendListBinding;
 import com.mahavira.arcanum.friends.presentation.AddFriendDialogFragment.NameDialogListener;
@@ -33,10 +34,9 @@ public class FriendListFragment extends BaseFragment<FragmentFriendListBinding, 
         // Required empty public constructor
     }
 
-
     @Override
     public int getViewModelBindingVariable() {
-        return 0;
+        return BR.viewModel;
     }
 
     @Override
