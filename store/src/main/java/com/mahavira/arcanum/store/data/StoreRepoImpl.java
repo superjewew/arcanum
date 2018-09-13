@@ -44,9 +44,14 @@ public class StoreRepoImpl extends BaseRepository implements StoreRepository {
     @NonNull
     private User updateUserVisitAt(final List<User> users, final List<Store> stores) {
         User user = users.get(0);
-        Store store = stores.get(0);
-        user.setPlayingAt(store.getName());
-        user.addRecentStores(store.getEmail());
+        Store store;
+        if(stores != null && stores.size() != 0) {
+            store = stores.get(0);
+            user.setPlayingAt(store.getName());
+            user.addRecentStores(store.getEmail());
+        } else {
+            user.setPlayingAt("");
+        }
         return user;
     }
 
