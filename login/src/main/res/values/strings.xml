@@ -9,4 +9,6 @@
     <string name="register_password_hint">Password (Required)</string>
     <string name="register_confirm_hint">Confirm Password</string>
     <string name="register_dob_hint">Tanggal Lahir</string>
+    <string name="channel_name">arcanum_channel</string>
+    <string name="channel_description">Arcanum Notification</string>
 </resources>

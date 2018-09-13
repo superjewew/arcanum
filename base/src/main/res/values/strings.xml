@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">base</string>
+
+    <string name="channel_id">arcanum</string>
 </resources>

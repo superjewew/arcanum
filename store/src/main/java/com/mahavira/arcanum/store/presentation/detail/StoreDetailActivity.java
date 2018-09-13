@@ -76,7 +76,7 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
             if(result != null) {
                 switch (result.status) {
                     case SUCCESS: {
-                        mManager.setupAlarm();
+                        mManager.setupRepeatingAlarm();
                         break;
                     }
                 }
