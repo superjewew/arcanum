@@ -33,6 +33,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Intent snoozeIntent = new Intent(context, VisitBroadcastReceiver.class);
         snoozeIntent.setAction(ACTION_SNOOZE);
+        snoozeIntent.putExtra(NOTIFICATION_ID_EXTRA, NOTIFICATION_ID);
 
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
