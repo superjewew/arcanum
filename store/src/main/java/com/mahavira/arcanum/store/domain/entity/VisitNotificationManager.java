@@ -25,8 +25,8 @@ public class VisitNotificationManager {
 
     public void setupRepeatingAlarm(String userEmail) {
         Calendar calendar = Calendar.getInstance();
-        int minute = calendar.get(Calendar.MINUTE);
-        calendar.set(Calendar.MINUTE, minute + 1);
+        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay + 2);
 
         SetVisitParam param = new SetVisitParam(userEmail, "");
 
