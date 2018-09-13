@@ -46,6 +46,10 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
     @Inject
     VisitNotificationManager mManager;
 
+    private String mStoreEmail;
+
+    private String mUserEmail;
+
     @Override
     public int getViewModelBindingVariable() {
         return BR.viewModel;
@@ -67,7 +71,7 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
 
         updateAvailableGames();
 
-        getViewModel().getPlayHereClickedEvent().observe(this, __ -> new IntentIntegrator(this).initiateScan());
+        getViewModel().getPlayHereClickedEvent().observe(this, __ -> mManager.setupRepeatingAlarm("norman@test.com", "test@email.com"));
 
         getViewModel().getProductClickedEvent()
                 .observe(this, productName -> mStoreRouter.goToProductDetail(this, productName));
@@ -76,7 +80,7 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
             if(result != null) {
                 switch (result.status) {
                     case SUCCESS: {
-                        mManager.setupRepeatingAlarm();
+                        mManager.setupRepeatingAlarm(mUserEmail, mStoreEmail);
                         break;
                     }
                 }
@@ -117,8 +121,9 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
 
                 EncryptedString s = new EncryptedString(result.getContents());
                 try {
-                    String storeEmail = s.decryptMsg().getValue();
-                    getViewModel().attemptSetVisit(user.getEmail(), storeEmail);
+                    mStoreEmail = s.decryptMsg().getValue();
+                    mUserEmail = user.getEmail();
+                    getViewModel().attemptSetVisit(mUserEmail, mStoreEmail);
                 } catch (NoSuchPaddingException e) {
                     e.printStackTrace();
                 } catch (NoSuchAlgorithmException e) {

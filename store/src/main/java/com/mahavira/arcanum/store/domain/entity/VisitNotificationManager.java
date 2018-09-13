@@ -21,15 +21,20 @@ public class VisitNotificationManager {
         mContext = context;
     }
 
-    public void setupRepeatingAlarm() {
+    public void setupRepeatingAlarm(String userEmail, String storeEmail) {
         Calendar calendar = Calendar.getInstance();
         int minute = calendar.get(Calendar.MINUTE);
         calendar.set(Calendar.MINUTE, minute + 1);
+
+        SetVisitParam param = new SetVisitParam(userEmail, storeEmail);
+
         Intent intent1 = new Intent(mContext, AlarmReceiver.class);
+        intent1.putExtra("PARAM_EXTRA", param.marshall());
         PendingIntent pendingIntent = PendingIntent
                 .getBroadcast(mContext, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+
         AlarmManager am = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 2 * AlarmManager.INTERVAL_HOUR, pendingIntent);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 2 * 60000, pendingIntent);
     }
 
 }
