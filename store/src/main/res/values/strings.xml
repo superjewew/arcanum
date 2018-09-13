@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">store</string>
+    <string name="notification_service_error">Something went wrong when getting notification service, please try again later</string>
+    <string name="general_error">Something went wrong, please try again later</string>
 </resources>

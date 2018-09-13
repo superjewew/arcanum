@@ -16,7 +16,7 @@ public class SetVisitUseCase implements CompletableUseCase<SetVisitParam> {
     private StoreRepository mRepository;
 
     @Inject
-    SetVisitUseCase(StoreRepository repository) {
+    public SetVisitUseCase(StoreRepository repository) {
         mRepository = repository;
     }
 

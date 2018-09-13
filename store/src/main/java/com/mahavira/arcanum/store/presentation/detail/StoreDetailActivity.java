@@ -71,16 +71,16 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
 
         updateAvailableGames();
 
-        getViewModel().getPlayHereClickedEvent().observe(this, __ -> mManager.setupRepeatingAlarm("norman@test.com", "test@email.com"));
+        getViewModel().getPlayHereClickedEvent().observe(this, __ -> new IntentIntegrator(this).initiateScan());
 
         getViewModel().getProductClickedEvent()
                 .observe(this, productName -> mStoreRouter.goToProductDetail(this, productName));
 
         getViewModel().getSetVisitResult().observe(this, result -> {
-            if(result != null) {
+            if (result != null) {
                 switch (result.status) {
                     case SUCCESS: {
-                        mManager.setupRepeatingAlarm(mUserEmail, mStoreEmail);
+                        mManager.setupRepeatingAlarm(mUserEmail);
                         break;
                     }
                 }

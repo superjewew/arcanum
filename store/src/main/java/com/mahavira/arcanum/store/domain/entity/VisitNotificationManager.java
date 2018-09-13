@@ -1,5 +1,7 @@
 package com.mahavira.arcanum.store.domain.entity;
 
+import static android.app.AlarmManager.INTERVAL_HOUR;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -21,12 +23,12 @@ public class VisitNotificationManager {
         mContext = context;
     }
 
-    public void setupRepeatingAlarm(String userEmail, String storeEmail) {
+    public void setupRepeatingAlarm(String userEmail) {
         Calendar calendar = Calendar.getInstance();
         int minute = calendar.get(Calendar.MINUTE);
         calendar.set(Calendar.MINUTE, minute + 1);
 
-        SetVisitParam param = new SetVisitParam(userEmail, storeEmail);
+        SetVisitParam param = new SetVisitParam(userEmail, "");
 
         Intent intent1 = new Intent(mContext, AlarmReceiver.class);
         intent1.putExtra("PARAM_EXTRA", param.marshall());
@@ -34,7 +36,7 @@ public class VisitNotificationManager {
                 .getBroadcast(mContext, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager am = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 2 * 60000, pendingIntent);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 2 * INTERVAL_HOUR, pendingIntent);
     }
 
 }
