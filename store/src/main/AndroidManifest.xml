@@ -6,6 +6,13 @@
         android:hardwareAccelerated="true" >
         <activity android:name=".presentation.StoreListActivity" />
         <activity android:name=".presentation.detail.StoreDetailActivity" />
+        <receiver android:name=".domain.entity.VisitBroadcastReceiver"  android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".domain.entity.AlarmReceiver"/>
     </application>
 
 </manifest>

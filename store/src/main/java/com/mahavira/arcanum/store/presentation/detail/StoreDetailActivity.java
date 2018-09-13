@@ -14,6 +14,7 @@ import com.mahavira.arcanum.store.R;
 import com.mahavira.arcanum.store.databinding.ActivityStoreDetailBinding;
 import com.mahavira.arcanum.store.domain.entity.EncryptedString;
 import com.mahavira.arcanum.store.domain.entity.Store;
+import com.mahavira.arcanum.store.domain.entity.VisitNotificationManager;
 import com.mahavira.arcanum.store.presentation.StoreRouter;
 import com.mahavira.base.presentation.BaseActivity;
 import com.mahavira.base.presentation.ExtraInjectable;
@@ -42,6 +43,9 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
     @Inject
     StoreRouter mStoreRouter;
 
+    @Inject
+    VisitNotificationManager mManager;
+
     @Override
     public int getViewModelBindingVariable() {
         return BR.viewModel;
@@ -67,6 +71,17 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
 
         getViewModel().getProductClickedEvent()
                 .observe(this, productName -> mStoreRouter.goToProductDetail(this, productName));
+
+        getViewModel().getSetVisitResult().observe(this, result -> {
+            if(result != null) {
+                switch (result.status) {
+                    case SUCCESS: {
+                        mManager.setupAlarm();
+                        break;
+                    }
+                }
+            }
+        });
 
     }
 
