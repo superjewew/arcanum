@@ -1,6 +1,8 @@
 package com.mahavira.arcanum.store.domain.entity;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by norman on 13/09/18.
+ * 
  */
 
 public class VisitBroadcastReceiver extends BroadcastReceiver {
@@ -43,11 +46,25 @@ public class VisitBroadcastReceiver extends BroadcastReceiver {
                 String userParam = intent.getStringExtra(PARAM_VISIT_USER_EXTRA);
 
                 leaveStore(context, userParam);
+                removeNotification(context);
                 break;
             }
         }
 
         cancelNotification(context, id);
+    }
+
+    private void removeNotification(Context context) {
+        Intent intent1 = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(context, 0, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        if (am == null) {
+            Toast.makeText(context, R.string.alarm_service_not_supported_error, Toast.LENGTH_SHORT).show();
+        } else {
+            am.cancel(pendingIntent);
+        }
     }
 
     private void leaveStore(final Context context, final String userParam) {
