@@ -21,6 +21,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <android.support.design.bottomappbar.BottomAppBar
+            style="@style/Widget.Arcanum.BottomAppBar"
             android:id="@+id/bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

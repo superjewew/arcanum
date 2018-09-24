@@ -18,9 +18,9 @@
     <style name="Widget.Arcanum.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
-    
-    <style name="Widget.Arcanum.ProgressBar" parent="Theme.MaterialComponents.Light">
-        <item name="colorAccent">?attr/colorAccent</item>
+
+    <style name="Widget.Arcanum.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="backgroundTint">?attr/colorPrimaryDark</item>
     </style>
 
 </resources>
