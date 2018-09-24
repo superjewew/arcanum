@@ -1,8 +1,10 @@
 package com.mahavira.arcanum.dashboard.presentation;
 
 import android.os.Bundle;
+import android.support.design.bottomappbar.BottomAppBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import com.mahavira.arcanum.dashboard.BR;
 import com.mahavira.arcanum.dashboard.R;
 import com.mahavira.arcanum.dashboard.databinding.ActivityDashboardBinding;
@@ -28,6 +30,8 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
 
     Fragment active = fragment1;
 
+    private DashboardBottomDrawerFragment mBottomDrawerFragment;
+
     private final FragmentManager mFragmentManager = getSupportFragmentManager();
 
     @Override
@@ -48,21 +52,31 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
         mFragmentManager.beginTransaction().add(R.id.container, fragment2, "2").hide(fragment2).commit();
         mFragmentManager.beginTransaction().add(R.id.container, fragment1, "1").commit();
 
+        mBottomDrawerFragment = DashboardBottomDrawerFragment.newInstance(getViewModel());
+
         getViewModel().getNavigationEvent().observe(this, navIndex -> {
             if (navIndex != null) {
                 switch (navIndex) {
                     case NAV_HOME_INDEX:
+                        getDataBinding().bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
+                        getDataBinding().fab.setImageResource(R.drawable.ic_camera_24dp);
                         showNewFragment(fragment1);
                         break;
                     case NAV_STORES_INDEX:
+                        getDataBinding().bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
+                        getDataBinding().fab.setImageResource(R.drawable.ic_search_24dp);
                         showNewFragment(fragment2);
                         break;
                     case NAV_FRIENDS_INDEX:
+                        getDataBinding().bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
+                        getDataBinding().fab.setImageResource(R.drawable.ic_search_24dp);
                         showNewFragment(fragment3);
                         break;
                 }
             }
         });
+
+        setSupportActionBar(getDataBinding().bar);
 
         setupBottomDrawer();
     }
@@ -74,8 +88,7 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
 
     private void setupBottomDrawer() {
         getDataBinding().bar.setNavigationOnClickListener(v -> {
-            DashboardBottomDrawerFragment fragment = DashboardBottomDrawerFragment.newInstance(getViewModel());
-            fragment.show(getSupportFragmentManager(), fragment.getTag());
+            mBottomDrawerFragment.show(mFragmentManager, mBottomDrawerFragment.getTag());
         });
         getDataBinding().bar.setNavigationIcon(R.drawable.ic_navigation_menu_24dp);
     }
