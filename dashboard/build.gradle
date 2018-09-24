@@ -63,6 +63,10 @@ dependencies {
     implementation libs.databindingBaseLibrary
     implementation libs.databindingLibrary
 
+    // Firebase
+    implementation libs.firebaseFirestore
+    implementation libs.firebaseAuth
+
     implementation project(path: ':base')
     implementation project(path: ':store')
     implementation project(path: ':home')

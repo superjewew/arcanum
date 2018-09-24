@@ -5,6 +5,8 @@ import android.support.design.bottomappbar.BottomAppBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mahavira.arcanum.dashboard.BR;
 import com.mahavira.arcanum.dashboard.R;
 import com.mahavira.arcanum.dashboard.databinding.ActivityDashboardBinding;
@@ -13,6 +15,7 @@ import com.mahavira.arcanum.friends.presentation.FriendListFragment;
 import com.mahavira.arcanum.home.presentation.HomeFragment;
 import com.mahavira.arcanum.store.presentation.StoreListFragment;
 import com.mahavira.base.presentation.BaseActivity;
+import javax.inject.Inject;
 
 public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, DashboardViewModel> {
 
@@ -34,6 +37,9 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
 
     private final FragmentManager mFragmentManager = getSupportFragmentManager();
 
+    @Inject
+    FirebaseAuth mAuth;
+
     @Override
     public int getViewModelBindingVariable() {
         return BR.viewModel;
@@ -52,7 +58,10 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
         mFragmentManager.beginTransaction().add(R.id.container, fragment2, "2").hide(fragment2).commit();
         mFragmentManager.beginTransaction().add(R.id.container, fragment1, "1").commit();
 
-        mBottomDrawerFragment = DashboardBottomDrawerFragment.newInstance(getViewModel());
+        FirebaseUser user = mAuth.getCurrentUser();
+        assert user != null;
+
+        mBottomDrawerFragment = DashboardBottomDrawerFragment.newInstance(getViewModel(), user.getEmail(), user.getDisplayName());
 
         getViewModel().getNavigationEvent().observe(this, navIndex -> {
             if (navIndex != null) {
