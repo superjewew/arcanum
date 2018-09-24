@@ -34,6 +34,7 @@ public class DashboardBottomDrawerFragment extends BottomSheetDialogFragment {
         NavigationView navigationView = view.findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(menuItem -> {
             mViewModel.onNavigationClicked(menuItem);
+            dismiss();
             return true;
         });
 
