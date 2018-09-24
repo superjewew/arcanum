@@ -1,8 +1,10 @@
 package com.mahavira.arcanum.dashboard.presentation;
 
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 import com.mahavira.arcanum.dashboard.BR;
 import com.mahavira.arcanum.dashboard.R;
 import com.mahavira.arcanum.dashboard.databinding.ActivityDashboardBinding;
@@ -28,6 +30,8 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
     Fragment active = fragment1;
 
     private final FragmentManager mFragmentManager = getSupportFragmentManager();
+
+    private BottomSheetBehavior<View> mBottomSheetBehavior;
 
     @Override
     public int getViewModelBindingVariable() {
@@ -62,10 +66,31 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
                 }
             }
         });
+
+        setupBottomDrawer();
     }
 
     private void showNewFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().hide(active).show(fragment).commit();
         active = fragment;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    private void setupBottomDrawer() {
+        View bottomDrawer = getDataBinding().bottomDrawer;
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomDrawer);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        getDataBinding().bar.setNavigationOnClickListener(
+                v -> mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED));
+        getDataBinding().bar.setNavigationIcon(R.drawable.ic_navigation_menu_24dp);
     }
 }

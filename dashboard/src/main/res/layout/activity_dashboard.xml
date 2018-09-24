@@ -9,7 +9,7 @@
             type="com.mahavira.arcanum.dashboard.presentation.DashboardViewModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.mahavira.arcanum.dashboard.presentation.DashboardActivity">
@@ -20,21 +20,36 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/navigationView"
-            android:layout_width="0dp"
+        <android.support.design.bottomappbar.BottomAppBar
+            android:id="@+id/bar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="0dp"
-            android:background="?android:attr/windowBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:itemBackground="@color/colorPrimary"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
-            app:menu="@menu/navigation"
-            app:onNavigationItemClicked="@{viewModel::onNavigationClicked}"/>
+            android:layout_gravity="bottom"
+            app:navigationIcon="@drawable/ic_navigation_menu_24dp"
+            app:navigationContentDescription="@string/cat_bottomappbar_navigation_button_content_description"/>
 
-    </android.support.constraint.ConstraintLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/cat_bottomappbar_fab_button_content_description"
+            app:layout_anchor="@id/bar"
+            app:srcCompat="@drawable/ic_camera_24dp"/>
+
+        <FrameLayout
+            android:id="@+id/bottom_drawer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="16dp"
+            app:behavior_hideable="true"
+            app:layout_behavior="@string/bottom_sheet_behavior">
+
+            <android.support.design.widget.NavigationView
+                android:id="@+id/navigation_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/navigation"/>
+        </FrameLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
 </layout>
