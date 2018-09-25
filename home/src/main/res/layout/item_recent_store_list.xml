@@ -7,6 +7,9 @@
         <variable
             name="storeName"
             type="String"/>
+        <variable
+            name="listener"
+            type="com.mahavira.base.core.BaseRecyclerAdapter.ItemClickListener"/>
     </data>
 
     <android.support.design.card.MaterialCardView
@@ -17,6 +20,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:onClick="@{() -> listener.onItemClicked(storeName)}"
         app:cardElevation="4dp">
 
         <android.support.constraint.ConstraintLayout

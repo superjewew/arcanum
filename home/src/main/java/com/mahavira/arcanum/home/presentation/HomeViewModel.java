@@ -6,16 +6,20 @@ import com.mahavira.base.core.Resource;
 import com.mahavira.base.presentation.BaseViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
 /**
  * Created by norman on 23/08/18.
+ *
  */
 
 public class HomeViewModel extends BaseViewModel {
 
     private final MutableLiveData<Resource<List<String>>> mRecentStoreData = new MutableLiveData<>();
+
+    private final MutableLiveData<String> mItemClicked = new MutableLiveData<>();
 
     private GetRecentStoreUseCase mGetRecentStoreUseCase;
 
@@ -24,8 +28,16 @@ public class HomeViewModel extends BaseViewModel {
         mGetRecentStoreUseCase = getRecentStoreUseCase;
     }
 
-    public MutableLiveData<Resource<List<String>>> getRecentStoreData() {
+    MutableLiveData<Resource<List<String>>> getRecentStoreData() {
         return mRecentStoreData;
+    }
+
+    MutableLiveData<String> getItemClicked() {
+        return mItemClicked;
+    }
+
+    void onItemClicked(final String item) {
+        mItemClicked.setValue(item);
     }
 
     void attemptGetRecentStore(String email) {

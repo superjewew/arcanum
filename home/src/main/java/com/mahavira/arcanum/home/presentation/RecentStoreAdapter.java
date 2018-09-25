@@ -18,8 +18,11 @@ public class RecentStoreAdapter extends BaseRecyclerAdapter<String, ItemRecentSt
 
     private Context mContext;
 
-    RecentStoreAdapter(Context context) {
+    private final HomeViewModel mViewModel;
+
+    RecentStoreAdapter(Context context, HomeViewModel viewModel) {
         mContext = context;
+        mViewModel = viewModel;
     }
 
     @Override
@@ -29,7 +32,9 @@ public class RecentStoreAdapter extends BaseRecyclerAdapter<String, ItemRecentSt
 
     @Override
     protected void bind(final ItemRecentStoreListBinding binding, final String data) {
+        ItemClickListener<String> listener = mViewModel::onItemClicked;
         binding.setStoreName(data);
+        binding.setListener(listener);
     }
 
     @Override

@@ -12,6 +12,8 @@ public interface StoreRouter {
 
     void goToStoreDetail(Context context, Store store);
 
+    void goToStoreDetail(Context context, String storeName);
+
     void goToPlayHereConfirmation(Context context);
 
     void goToProductDetail(Context context, String name);

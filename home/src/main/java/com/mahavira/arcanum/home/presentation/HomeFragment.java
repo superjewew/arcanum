@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.mahavira.arcanum.home.BR;
 import com.mahavira.arcanum.home.R;
 import com.mahavira.arcanum.home.databinding.FragmentHomeBinding;
+import com.mahavira.arcanum.store.presentation.StoreRouter;
 import com.mahavira.base.presentation.BaseFragment;
 import javax.inject.Inject;
 
@@ -23,6 +24,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
 
     @Inject
     FirebaseAuth mFirebaseAuth;
+
+    @Inject
+    StoreRouter mStoreRouter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -58,6 +62,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             }
         });
 
+        getViewModel().getItemClicked().observe(this, storeName -> {
+            assert storeName != null;
+            mStoreRouter.goToStoreDetail(getActivity(), storeName);
+        });
+
         FirebaseUser user = mFirebaseAuth.getCurrentUser();
         if(user != null) {
             getViewModel().attemptGetRecentStore(user.getEmail());
@@ -65,7 +74,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     }
 
     private void setupAdapter() {
-        mAdapter = new RecentStoreAdapter(getActivity());
+        mAdapter = new RecentStoreAdapter(getActivity(), getViewModel());
     }
 
     private void setupRecyclerView(final RecentStoreAdapter adapter) {

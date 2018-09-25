@@ -26,6 +26,11 @@ public class StoreRouterImpl implements StoreRouter {
     }
 
     @Override
+    public void goToStoreDetail(final Context context, final String storeName) {
+
+    }
+
+    @Override
     public void goToPlayHereConfirmation(final Context context) {
 
     }
