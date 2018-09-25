@@ -3,4 +3,8 @@
     <string name="nav_home">Home</string>
     <string name="nav_stores">Stores</string>
     <string name="nav_friends">Friends</string>
+
+    <string name="cat_bottomappbar_navigation_button_content_description">Show navigation drawer</string>
+    <string name="cat_bottomappbar_fab_button_content_description">FAB</string>
+
 </resources>

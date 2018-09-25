@@ -28,7 +28,7 @@ public class RegisterViewModel extends BaseViewModel {
 
     public final ObservableField<String> mConfirmErrorMessage = new ObservableField<>();
 
-    private final MutableLiveData<Resource<Boolean>> mRegisterResultData = new MutableLiveData<>();
+    private final MutableLiveData<Resource<User>> mRegisterResultData = new MutableLiveData<>();
 
     private RegisterUseCase mRegisterUseCase;
 
@@ -37,7 +37,7 @@ public class RegisterViewModel extends BaseViewModel {
         mRegisterUseCase = registerUseCase;
     }
 
-    MutableLiveData<Resource<Boolean>> getRegisterResultData() {
+    MutableLiveData<Resource<User>> getRegisterResultData() {
         return mRegisterResultData;
     }
 
@@ -52,10 +52,10 @@ public class RegisterViewModel extends BaseViewModel {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnSubscribe(__ -> doOnSubscribe())
-                        .subscribe(this::onRegisterSuccess, this::onRegisterFailed));
+                        .subscribe(() -> onRegisterSuccess(user), this::onRegisterFailed));
             } catch (Exception e) {
                 e.printStackTrace();
-                mRegisterResultData.setValue(Resource.error(null, e.getLocalizedMessage(), false));
+                mRegisterResultData.setValue(Resource.error(null, e.getLocalizedMessage(), null));
             }
         }
 
@@ -65,14 +65,14 @@ public class RegisterViewModel extends BaseViewModel {
         mConfirmErrorMessage.set(validator.mConfirmError);
     }
 
-    private void onRegisterSuccess() {
+    private void onRegisterSuccess(User user) {
         hideLoading();
-        mRegisterResultData.setValue(Resource.success(true));
+        mRegisterResultData.setValue(Resource.success(user));
     }
 
     private void onRegisterFailed(final Throwable throwable) {
         hideLoading();
-        mRegisterResultData.setValue(Resource.error(null, throwable.getLocalizedMessage(), false));
+        mRegisterResultData.setValue(Resource.error(null, throwable.getLocalizedMessage(), null));
     }
 
 }

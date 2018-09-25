@@ -33,6 +33,7 @@ android {
 
     defaultConfig {
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
     }
 
 }
@@ -61,6 +62,10 @@ dependencies {
     // DataBinding
     implementation libs.databindingBaseLibrary
     implementation libs.databindingLibrary
+
+    // Firebase
+    implementation libs.firebaseFirestore
+    implementation libs.firebaseAuth
 
     implementation project(path: ':base')
     implementation project(path: ':store')
