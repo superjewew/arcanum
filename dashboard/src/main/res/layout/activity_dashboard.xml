@@ -14,6 +14,18 @@
         android:layout_height="match_parent"
         tools:context="com.mahavira.arcanum.dashboard.presentation.DashboardActivity">
 
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:elevation="0dp">
+
+            <android.support.v7.widget.Toolbar
+                style="@style/Widget.Arcanum.Toolbar"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </android.support.design.widget.AppBarLayout>
+
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"

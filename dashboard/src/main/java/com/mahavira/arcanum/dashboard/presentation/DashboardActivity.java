@@ -61,24 +61,30 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
         FirebaseUser user = mAuth.getCurrentUser();
         assert user != null;
 
-        mBottomDrawerFragment = DashboardBottomDrawerFragment.newInstance(getViewModel(), user.getEmail(), user.getDisplayName());
+        mBottomDrawerFragment = DashboardBottomDrawerFragment
+                .newInstance(getViewModel(), user.getEmail(), user.getDisplayName());
+
+        setToolbarTitle(NAV_HOME_INDEX);
 
         getViewModel().getNavigationEvent().observe(this, navIndex -> {
             if (navIndex != null) {
                 switch (navIndex) {
                     case NAV_HOME_INDEX:
-                        getDataBinding().bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
+                        shiftFabAlignmentToCenter();
                         getDataBinding().fab.setImageResource(R.drawable.ic_camera_24dp);
+                        setToolbarTitle(NAV_HOME_INDEX);
                         showNewFragment(fragment1);
                         break;
                     case NAV_STORES_INDEX:
-                        getDataBinding().bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
+                        shiftFabAlignmentToEnd();
                         getDataBinding().fab.setImageResource(R.drawable.ic_search_24dp);
+                        setToolbarTitle(NAV_STORES_INDEX);
                         showNewFragment(fragment2);
                         break;
                     case NAV_FRIENDS_INDEX:
-                        getDataBinding().bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
+                        shiftFabAlignmentToEnd();
                         getDataBinding().fab.setImageResource(R.drawable.ic_search_24dp);
+                        setToolbarTitle(NAV_FRIENDS_INDEX);
                         showNewFragment(fragment3);
                         break;
                 }
@@ -88,6 +94,32 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
         setSupportActionBar(getDataBinding().bar);
 
         setupBottomDrawer();
+    }
+
+    private void setToolbarTitle(int index) {
+        switch (index) {
+            case NAV_HOME_INDEX: {
+                getDataBinding().toolbar.setTitle("Home");
+                break;
+            }
+            case NAV_STORES_INDEX: {
+                getDataBinding().toolbar.setTitle("Stores");
+                break;
+            }
+            case NAV_FRIENDS_INDEX: {
+                getDataBinding().toolbar.setTitle("Friends");
+                break;
+            }
+        }
+    }
+
+    private void shiftFabAlignmentToCenter() {
+        getDataBinding().bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
+    }
+
+
+    private void shiftFabAlignmentToEnd() {
+        getDataBinding().bar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
     }
 
     private void showNewFragment(Fragment fragment) {
