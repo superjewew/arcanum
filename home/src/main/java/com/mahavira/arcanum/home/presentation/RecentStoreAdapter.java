@@ -5,6 +5,7 @@ import android.support.v7.util.DiffUtil.Callback;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import com.mahavira.arcanum.home.databinding.ItemRecentStoreListBinding;
+import com.mahavira.arcanum.store.domain.entity.Store;
 import com.mahavira.base.core.BaseRecyclerAdapter;
 import java.util.List;
 
@@ -14,22 +15,27 @@ import java.util.List;
  *
  */
 
-public class RecentStoreAdapter extends BaseRecyclerAdapter<String, ItemRecentStoreListBinding> {
+public class RecentStoreAdapter extends BaseRecyclerAdapter<Store, ItemRecentStoreListBinding> {
 
     private Context mContext;
 
-    RecentStoreAdapter(Context context) {
+    private final HomeViewModel mViewModel;
+
+    RecentStoreAdapter(Context context, HomeViewModel viewModel) {
         mContext = context;
+        mViewModel = viewModel;
     }
 
     @Override
-    protected Callback getCallback(final List<String> oldData, final List<String> newData) {
+    protected Callback getCallback(final List<Store> oldData, final List<Store> newData) {
         return new RecentStoreDiffCallback(oldData, newData);
     }
 
     @Override
-    protected void bind(final ItemRecentStoreListBinding binding, final String data) {
-        binding.setStoreName(data);
+    protected void bind(final ItemRecentStoreListBinding binding, final Store data) {
+        ItemClickListener<Store> listener = mViewModel::onItemClicked;
+        binding.setStore(data);
+        binding.setListener(listener);
     }
 
     @Override

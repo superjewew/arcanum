@@ -1,6 +1,7 @@
 package com.mahavira.arcanum.home.presentation;
 
 import android.support.v7.util.DiffUtil;
+import com.mahavira.arcanum.store.domain.entity.Store;
 import java.util.List;
 
 /**
@@ -11,11 +12,11 @@ import java.util.List;
 
 public class RecentStoreDiffCallback extends DiffUtil.Callback {
 
-    private final List<String> mOldRecentStoreList;
+    private final List<Store> mOldRecentStoreList;
 
-    private final List<String> mNewRecentStoreList;
+    private final List<Store> mNewRecentStoreList;
 
-    RecentStoreDiffCallback(List<String> oldRecentStoreList, List<String> newRecentStoreList) {
+    RecentStoreDiffCallback(List<Store> oldRecentStoreList, List<Store> newRecentStoreList) {
         mOldRecentStoreList = oldRecentStoreList;
         mNewRecentStoreList = newRecentStoreList;
     }
