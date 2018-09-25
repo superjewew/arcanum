@@ -33,8 +33,8 @@ public class RecentStoreAdapter extends BaseRecyclerAdapter<Store, ItemRecentSto
 
     @Override
     protected void bind(final ItemRecentStoreListBinding binding, final Store data) {
-        ItemClickListener<String> listener = mViewModel::onItemClicked;
-        binding.setStoreName(data.getName());
+        ItemClickListener<Store> listener = mViewModel::onItemClicked;
+        binding.setStore(data);
         binding.setListener(listener);
     }
 

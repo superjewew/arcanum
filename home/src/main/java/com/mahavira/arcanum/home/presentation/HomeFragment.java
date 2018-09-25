@@ -62,9 +62,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             }
         });
 
-        getViewModel().getItemClicked().observe(this, storeName -> {
-            assert storeName != null;
-            mStoreRouter.goToStoreDetail(getActivity(), storeName);
+        getViewModel().getItemClicked().observe(this, store -> {
+            assert store != null;
+            mStoreRouter.goToStoreDetail(getActivity(), store);
         });
 
         FirebaseUser user = mFirebaseAuth.getCurrentUser();

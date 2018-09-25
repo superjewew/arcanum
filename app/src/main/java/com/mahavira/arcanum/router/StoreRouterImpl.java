@@ -27,13 +27,6 @@ public class StoreRouterImpl implements StoreRouter {
     }
 
     @Override
-    public void goToStoreDetail(final Context context, final String storeName) {
-        Intent intent = new Intent(context, StoreDetailActivity.class);
-        intent.putExtra(STORE_NAME_EXTRA, storeName);
-        context.startActivity(intent);
-    }
-
-    @Override
     public void goToPlayHereConfirmation(final Context context) {
 
     }

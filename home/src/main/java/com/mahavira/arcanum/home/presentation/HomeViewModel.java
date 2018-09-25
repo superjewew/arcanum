@@ -20,7 +20,7 @@ public class HomeViewModel extends BaseViewModel {
 
     private final MutableLiveData<Resource<List<Store>>> mRecentStoreData = new MutableLiveData<>();
 
-    private final MutableLiveData<String> mItemClicked = new MutableLiveData<>();
+    private final MutableLiveData<Store> mItemClicked = new MutableLiveData<>();
 
     private GetRecentStoreUseCase mGetRecentStoreUseCase;
 
@@ -33,11 +33,11 @@ public class HomeViewModel extends BaseViewModel {
         return mRecentStoreData;
     }
 
-    MutableLiveData<String> getItemClicked() {
+    MutableLiveData<Store> getItemClicked() {
         return mItemClicked;
     }
 
-    void onItemClicked(final String item) {
+    void onItemClicked(final Store item) {
         mItemClicked.setValue(item);
     }
 

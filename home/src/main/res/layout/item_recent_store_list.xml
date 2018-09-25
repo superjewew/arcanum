@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="storeName"
-            type="String"/>
+            name="store"
+            type="com.mahavira.arcanum.store.domain.entity.Store"/>
         <variable
             name="listener"
             type="com.mahavira.base.core.BaseRecyclerAdapter.ItemClickListener"/>
@@ -20,7 +20,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="@{() -> listener.onItemClicked(storeName)}">
+        android:onClick="@{() -> listener.onItemClicked(store)}">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="@{storeName}"
+                android:text="@{store.name}"
                 android:textAppearance="?attr/textAppearanceSubtitle2"
                 app:layout_constraintTop_toBottomOf="@id/store_image"
                 tools:text="Test"/>
