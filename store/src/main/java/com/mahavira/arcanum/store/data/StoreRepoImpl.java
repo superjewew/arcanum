@@ -35,8 +35,16 @@ public class StoreRepoImpl extends BaseRepository implements StoreRepository {
     }
 
     @Override
+    public Single<Store> getStore(final String param) {
+        return queryStore(param).flatMap(stores -> {
+            Store store = stores.get(0);
+            return Single.just(store);
+        });
+    }
+
+    @Override
     public Completable setVisit(final String userEmail, final String storeEmail) {
-        return getUser(userEmail).zipWith(getStore(storeEmail), this::updateUserVisitAt)
+        return queryUser(userEmail).zipWith(queryStore(storeEmail), this::updateUserVisitAt)
                 .flatMapCompletable(user ->
                         setValue(mInstance.collection(USER_COLLECTION).document(user.getEmail()), user));
     }
@@ -55,11 +63,11 @@ public class StoreRepoImpl extends BaseRepository implements StoreRepository {
         return user;
     }
 
-    private Single<List<User>> getUser(String email) {
+    private Single<List<User>> queryUser(String email) {
         return query(mInstance.collection(USER_COLLECTION), "email", email, User.class).toSingle();
     }
 
-    private Single<List<Store>> getStore(String email) {
+    private Single<List<Store>> queryStore(String email) {
         return query(mInstance.collection(STORE_COLLECTION), "email", email, Store.class).toSingle();
     }
 }

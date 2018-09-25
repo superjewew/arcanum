@@ -33,6 +33,8 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
 
     public static final String STORE_EXTRA = "store";
 
+    public static final String STORE_NAME_EXTRA = "store_name";
+
     private StoreDetailAdapter mAdapter;
 
     private Store mStore;
@@ -47,6 +49,8 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
     VisitNotificationManager mManager;
 
     private String mStoreEmail;
+
+    private String mStoreName;
 
     private String mUserEmail;
 
@@ -69,8 +73,6 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
         setupAdapter();
         setupRecyclerView(mAdapter);
 
-        updateAvailableGames();
-
         getViewModel().getPlayHereClickedEvent().observe(this, __ -> new IntentIntegrator(this).initiateScan());
 
         getViewModel().getProductClickedEvent()
@@ -87,6 +89,32 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
             }
         });
 
+        getViewModel().getStoreDetailData().observe(this, storeResource -> {
+            assert storeResource != null;
+            switch (storeResource.status) {
+                case SUCCESS: {
+                    mStore = storeResource.data;
+                    getDataBinding().setStore(mStore);
+                    updateAvailableGames();
+                    break;
+                }
+                case ERROR: {
+                    Toast.makeText(this, "Error loading store detail, " + storeResource.message, Toast.LENGTH_SHORT)
+                            .show();
+                    break;
+                }
+            }
+        });
+
+        if (mStoreName != null && !"".equals(mStoreName)) {
+            try {
+                getViewModel().attemptGetStoreDetail(mStoreName);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            updateAvailableGames();
+        }
     }
 
     private void updateAvailableGames() {
@@ -106,6 +134,10 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
     public void injectExtras(@NonNull final Bundle extras) {
         if (extras.containsKey(STORE_EXTRA)) {
             mStore = Parcels.unwrap(extras.getParcelable(STORE_EXTRA));
+        }
+
+        if (extras.containsKey(STORE_NAME_EXTRA)) {
+            mStoreName = extras.getString(STORE_NAME_EXTRA);
         }
     }
 

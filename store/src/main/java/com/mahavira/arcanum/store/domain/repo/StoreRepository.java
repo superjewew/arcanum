@@ -13,5 +13,8 @@ import java.util.List;
 public interface StoreRepository {
 
     Single<List<Store>> getStore();
+
+    Single<Store> getStore(String param);
+
     Completable setVisit(String user, String store);
 }

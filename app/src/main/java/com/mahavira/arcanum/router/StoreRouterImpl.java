@@ -2,6 +2,7 @@ package com.mahavira.arcanum.router;
 
 import static com.mahavira.arcanum.product.presentation.ProductDetailActivity.PRODUCT_NAME_EXTRA;
 import static com.mahavira.arcanum.store.presentation.detail.StoreDetailActivity.STORE_EXTRA;
+import static com.mahavira.arcanum.store.presentation.detail.StoreDetailActivity.STORE_NAME_EXTRA;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +28,9 @@ public class StoreRouterImpl implements StoreRouter {
 
     @Override
     public void goToStoreDetail(final Context context, final String storeName) {
-
+        Intent intent = new Intent(context, StoreDetailActivity.class);
+        intent.putExtra(STORE_NAME_EXTRA, storeName);
+        context.startActivity(intent);
     }
 
     @Override
