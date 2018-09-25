@@ -13,15 +13,14 @@
     </data>
 
     <android.support.design.card.MaterialCardView
-        style="@style/Widget.MaterialComponents.CardView"
+        style="@style/Widget.Arcanum.CardView"
         android:layout_width="188dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:onClick="@{() -> listener.onItemClicked(storeName)}"
-        app:cardElevation="4dp">
+        android:onClick="@{() -> listener.onItemClicked(storeName)}">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
