@@ -17,6 +17,8 @@ public class BaseRepository {
 
     protected static final String USER_COLLECTION = "users";
 
+    protected static final String PARTNER_COLLECTION = "partner";
+
     @NonNull
     protected <T> Maybe<List<T>> getValue(@NonNull final CollectionReference ref, Class<T> clazz) {
         return Maybe.create(
