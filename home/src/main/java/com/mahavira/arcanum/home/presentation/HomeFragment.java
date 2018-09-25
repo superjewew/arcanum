@@ -69,7 +69,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     }
 
     private void setupRecyclerView(final RecentStoreAdapter adapter) {
-        getDataBinding().recentStoreList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        getDataBinding().recentStoreList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         getDataBinding().recentStoreList.setAdapter(adapter);
     }
 

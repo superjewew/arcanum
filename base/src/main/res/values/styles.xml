@@ -9,7 +9,7 @@
         <item name="android:colorControlActivated" tools:targetApi="lollipop">@color/colorAccent</item>
         <item name="android:dialogTheme">@style/AppDialogTheme</item>
         <item name="android:textColorPrimary">@color/primary_text</item>
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/default_grey_bg</item>
     </style>
 
     <style name="AppDialogTheme" parent="Theme.AppCompat.Light.Dialog">
