@@ -2,6 +2,7 @@ package com.mahavira.arcanum.home.presentation;
 
 import android.arch.lifecycle.MutableLiveData;
 import com.mahavira.arcanum.home.domain.usecase.GetRecentStoreUseCase;
+import com.mahavira.arcanum.store.domain.entity.Store;
 import com.mahavira.base.core.Resource;
 import com.mahavira.base.presentation.BaseViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,7 +18,7 @@ import javax.inject.Inject;
 
 public class HomeViewModel extends BaseViewModel {
 
-    private final MutableLiveData<Resource<List<String>>> mRecentStoreData = new MutableLiveData<>();
+    private final MutableLiveData<Resource<List<Store>>> mRecentStoreData = new MutableLiveData<>();
 
     private final MutableLiveData<String> mItemClicked = new MutableLiveData<>();
 
@@ -28,7 +29,7 @@ public class HomeViewModel extends BaseViewModel {
         mGetRecentStoreUseCase = getRecentStoreUseCase;
     }
 
-    MutableLiveData<Resource<List<String>>> getRecentStoreData() {
+    MutableLiveData<Resource<List<Store>>> getRecentStoreData() {
         return mRecentStoreData;
     }
 
@@ -49,8 +50,8 @@ public class HomeViewModel extends BaseViewModel {
                 .subscribe(this::onGetRecentSuccess, this::onGetRecentFailed));
     }
 
-    private void onGetRecentSuccess(final List<String> strings) {
-        mRecentStoreData.setValue(Resource.success(strings));
+    private void onGetRecentSuccess(final List<Store> stores) {
+        mRecentStoreData.setValue(Resource.success(stores));
     }
 
     private void onGetRecentFailed(final Throwable throwable) {
