@@ -70,19 +70,22 @@ public class DashboardActivity extends BaseActivity<ActivityDashboardBinding, Da
             if (navIndex != null) {
                 switch (navIndex) {
                     case NAV_HOME_INDEX:
+                        getDataBinding().fab.show();
                         shiftFabAlignmentToCenter();
                         getDataBinding().fab.setImageResource(R.drawable.ic_camera_24dp);
                         setToolbarTitle(NAV_HOME_INDEX);
                         showNewFragment(fragment1);
                         break;
                     case NAV_STORES_INDEX:
-                        shiftFabAlignmentToEnd();
+                        getDataBinding().fab.hide();
+//                        shiftFabAlignmentToEnd();
                         getDataBinding().fab.setImageResource(R.drawable.ic_search_24dp);
                         setToolbarTitle(NAV_STORES_INDEX);
                         showNewFragment(fragment2);
                         break;
                     case NAV_FRIENDS_INDEX:
-                        shiftFabAlignmentToEnd();
+                        getDataBinding().fab.hide();
+//                        shiftFabAlignmentToEnd();
                         getDataBinding().fab.setImageResource(R.drawable.ic_search_24dp);
                         setToolbarTitle(NAV_FRIENDS_INDEX);
                         showNewFragment(fragment3);
