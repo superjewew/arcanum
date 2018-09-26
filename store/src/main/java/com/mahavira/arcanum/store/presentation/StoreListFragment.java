@@ -4,11 +4,7 @@ package com.mahavira.arcanum.store.presentation;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.support.v7.widget.GridLayoutManager;
 import android.widget.Toast;
 import com.mahavira.arcanum.store.R;
 import com.mahavira.arcanum.store.databinding.FragmentStoreBinding;
@@ -66,7 +62,8 @@ public class StoreListFragment extends BaseFragment<FragmentStoreBinding, StoreL
     }
 
     private void setupRecyclerView(final StoreListAdapter adapter) {
-        getDataBinding().storeList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        getDataBinding().storeList.setLayoutManager(
+                new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false));
         getDataBinding().storeList.setAdapter(adapter);
     }
 
