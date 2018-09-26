@@ -75,5 +75,8 @@ dependencies {
     implementation libs.rxAndroid
     implementation libs.rxJava
 
+    // Circle Image View
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
     implementation project(path: ':base')
 }
