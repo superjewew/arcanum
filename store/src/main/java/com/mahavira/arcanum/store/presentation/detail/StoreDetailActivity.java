@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -68,6 +70,8 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setupToolbar();
+
         getDataBinding().setStore(mStore);
 
         setupAdapter();
@@ -117,6 +121,15 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
         }
     }
 
+    private void setupToolbar() {
+        Toolbar toolbar = getDataBinding().toolbar;
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle(mStore.getName());
+    }
+
     private void updateAvailableGames() {
         mAdapter.addData(mStore.getBorrowedGames());
     }
@@ -128,6 +141,16 @@ public class StoreDetailActivity extends BaseActivity<ActivityStoreDetailBinding
     private void setupRecyclerView(final StoreDetailAdapter adapter) {
         getDataBinding().storeGameList.setLayoutManager(new GridLayoutManager(this, 3));
         getDataBinding().storeGameList.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
