@@ -12,13 +12,14 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
 
-        <android.support.v7.widget.RecyclerView
+        <com.mahavira.base.presentation.view.GridRecyclerView
             android:id="@+id/store_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layoutAnimation="@anim/grid_layout_animation_from_bottom"
             tools:listitem="@layout/item_store_list">
 
-        </android.support.v7.widget.RecyclerView>
+        </com.mahavira.base.presentation.view.GridRecyclerView>
 
     </android.support.constraint.ConstraintLayout>
 </layout>
